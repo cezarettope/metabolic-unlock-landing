@@ -195,36 +195,106 @@ function LandingPage() {
               "radial-gradient(60% 50% at 50% 0%, var(--brand) 0%, transparent 70%)",
           }}
         />
-        <div className="relative mx-auto max-w-4xl px-6 pt-16 pb-20 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-white/90">
-            <Flame className="h-4 w-4" style={{ color: "var(--brand)" }} />
-            Protocolo Termo Hormonal
-          </span>
-          <h1 className="mt-6 text-3xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05]">
-            DESBLOQUEIE O EMAGRECIMENTO QUE{" "}
-            <span style={{ color: "var(--brand)" }}>SEU CORPO ESCONDE</span>
-          </h1>
-          <p className="mt-5 text-lg sm:text-xl font-medium text-white/85 max-w-2xl mx-auto">
-            Ative seu metabolismo e perca peso de forma natural.
-          </p>
-          <p className="mt-4 text-sm sm:text-base text-white/70 max-w-xl mx-auto">
-            +500 mil pessoas já ativaram esse protocolo e destravaram o
-            metabolismo.
-          </p>
-          <div className="mt-8 flex justify-center">
-            <PulseButton href="#planos">QUERO ACESSAR O PROTOCOLO AGORA</PulseButton>
+        <div className="relative mx-auto max-w-6xl px-6 pt-14 pb-16">
+          <div className="grid md:grid-cols-[1fr_auto] gap-10 items-center">
+            <div className="text-center md:text-left">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-white/90">
+                <Flame className="h-4 w-4" style={{ color: "var(--brand)" }} />
+                Protocolo Termo Hormonal
+              </span>
+              <h1 className="mt-6 text-3xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05]">
+                DESBLOQUEIE O EMAGRECIMENTO QUE{" "}
+                <span style={{ color: "var(--brand)" }}>SEU CORPO ESCONDE</span>
+              </h1>
+              <p className="mt-5 text-lg sm:text-xl font-medium text-white/85 max-w-2xl">
+                Ative seu metabolismo e perca peso de forma natural.
+              </p>
+              <p className="mt-4 text-sm sm:text-base text-white/70 max-w-xl">
+                +500 mil pessoas já ativaram esse protocolo e destravaram o
+                metabolismo.
+              </p>
+              <div className="mt-8 flex justify-center md:justify-start">
+                <PulseButton href="#planos">QUERO ACESSAR O PROTOCOLO AGORA</PulseButton>
+              </div>
+              <div className="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-2 text-xs text-white/70">
+                <span className="inline-flex items-center gap-1.5">
+                  <ShieldCheck className="h-4 w-4" /> 30 dias de garantia
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Lock className="h-4 w-4" /> Compra 100% segura
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Star className="h-4 w-4" style={{ color: "var(--brand)" }} /> 4.9/5 em
+                  avaliações
+                </span>
+              </div>
+            </div>
+
+            {/* EXPERT */}
+            <div className="flex flex-col items-center md:items-end">
+              <div
+                className="relative rounded-3xl overflow-hidden border-4"
+                style={{
+                  borderColor: "var(--brand)",
+                  boxShadow: "var(--shadow-brand)",
+                  width: "260px",
+                  height: "320px",
+                }}
+              >
+                <img
+                  src={expertImg}
+                  alt="Mentora especialista do Protocolo Termo Hormonal"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="mt-3 text-center md:text-right">
+                <p className="text-sm font-bold text-white">Sua Mentora Especialista</p>
+                <p className="text-xs text-white/70">Nutrição & Saúde Hormonal</p>
+              </div>
+            </div>
           </div>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-white/70">
-            <span className="inline-flex items-center gap-1.5">
-              <ShieldCheck className="h-4 w-4" /> 30 dias de garantia
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Lock className="h-4 w-4" /> Compra 100% segura
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Star className="h-4 w-4" style={{ color: "var(--brand)" }} /> 4.9/5 em
-              avaliações
-            </span>
+
+          {/* QUICK PLANS CTA after headline */}
+          <div className="mt-14">
+            <p className="text-center text-xs font-bold uppercase tracking-widest text-white/70 mb-4">
+              Escolha seu acesso e comece agora
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-4xl mx-auto">
+              {PLANS.map((p) => (
+                <a
+                  key={`hero-${p.name}`}
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`relative rounded-2xl p-4 flex flex-col items-center text-center transition hover:scale-[1.02] ${
+                    p.highlight
+                      ? "bg-white text-foreground shadow-2xl"
+                      : "bg-white/10 border border-white/20 text-white hover:bg-white/15"
+                  }`}
+                >
+                  {p.badge && (
+                    <span
+                      className="absolute -top-2 left-1/2 -translate-x-1/2 rounded-full px-3 py-0.5 text-[10px] font-extrabold tracking-wider text-white whitespace-nowrap"
+                      style={{ background: "var(--gradient-brand)" }}
+                    >
+                      {p.badge}
+                    </span>
+                  )}
+                  <div className="text-xs font-bold uppercase tracking-wide mt-1 opacity-80">
+                    {p.name}
+                  </div>
+                  <div className="text-2xl font-extrabold mt-1">{p.price}</div>
+                  <div
+                    className={`mt-3 text-[11px] font-extrabold uppercase tracking-wider rounded-full px-3 py-1.5 ${
+                      p.highlight ? "text-white" : "bg-white/15"
+                    }`}
+                    style={p.highlight ? { background: "var(--gradient-brand)" } : undefined}
+                  >
+                    {p.cta} →
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </section>
