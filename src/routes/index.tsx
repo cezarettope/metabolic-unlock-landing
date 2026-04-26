@@ -11,7 +11,13 @@ import {
   Lock,
   Clock,
   TrendingDown,
+  Check,
+  CheckCheck,
 } from "lucide-react";
+import expertImg from "@/assets/expert.png";
+import dep1 from "@/assets/depoimento-1.png";
+import dep2 from "@/assets/depoimento-2.png";
+import dep3 from "@/assets/depoimento-3.png";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -91,17 +97,38 @@ const TESTIMONIALS = [
   {
     name: "Carla M.",
     result: "-12kg em 90 dias",
-    text: "Eu não conseguia perder nem 1 kg fazendo dieta. Em 3 meses com o protocolo eliminei 12kg e desinchei completamente.",
+    photo: dep1,
+    time: "09:42",
+    messages: [
+      { from: "her", text: "Oi!! Preciso te contar 🥹" },
+      { from: "her", text: "Eu não conseguia perder NEM 1kg fazendo dieta há 2 anos." },
+      { from: "her", text: "Em 3 meses com o protocolo eliminei 12kg e desinchei completamente 😭❤️" },
+      { from: "her", text: "Tô usando roupas que estavam guardadas há anos!" },
+    ],
   },
   {
     name: "Juliana R.",
     result: "-8kg em 60 dias",
-    text: "Achei que era impossível depois dos 40. O protocolo destravou meu metabolismo e voltei a caber nas roupas que amava.",
+    photo: dep2,
+    time: "14:08",
+    messages: [
+      { from: "her", text: "Achei que era impossível depois dos 40 😩" },
+      { from: "her", text: "Mas o protocolo destravou meu metabolismo de verdade." },
+      { from: "her", text: "8kg em 60 dias, sem passar fome e sem remédio 🙌" },
+      { from: "her", text: "Voltei a caber nas roupas que eu amava 💃" },
+    ],
   },
   {
     name: "Patrícia L.",
     result: "-15kg em 4 meses",
-    text: "A retenção de líquido sumiu na primeira semana. É o método mais simples e que mais funcionou pra mim.",
+    photo: dep3,
+    time: "20:15",
+    messages: [
+      { from: "her", text: "Gente, a retenção de líquido sumiu na PRIMEIRA semana 😱" },
+      { from: "her", text: "Minha barriga desinchou que eu não acreditei." },
+      { from: "her", text: "15kg a menos em 4 meses, é o método mais simples que já fiz!" },
+      { from: "her", text: "Recomendo de olhos fechados ❤️🔥" },
+    ],
   },
 ];
 
