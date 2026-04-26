@@ -11,8 +11,13 @@ import {
   Lock,
   Clock,
   TrendingDown,
-  Check,
   CheckCheck,
+  Zap,
+  Droplet,
+  Cookie,
+  Target,
+  AlertTriangle,
+  Scale,
 } from "lucide-react";
 import expertImg from "@/assets/expert.png";
 import dep1 from "@/assets/depoimento-1.png";
@@ -304,64 +309,57 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* TSL */}
-      <section className="mx-auto max-w-3xl px-6 py-20">
-        <h2 className="text-3xl sm:text-4xl font-extrabold mb-6">
-          Você faz tudo certo... e a balança não desce. Sabe por quê?
-        </h2>
-        <div className="space-y-5 text-lg leading-relaxed text-foreground/85">
-          <p>
-            Se você corta calorias, treina, evita carboidrato e mesmo assim
-            <strong> continua inchada, cansada e sem perder peso</strong>, o
-            problema não é a sua força de vontade.
+      {/* TSL — versão resumida e visual */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <div className="text-center max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-5">
+            Faz tudo certo e a balança <span style={{ color: "var(--brand)" }}>não desce</span>?
+          </h2>
+          <p className="text-lg text-foreground/80 leading-relaxed">
+            O problema não é força de vontade — é o{" "}
+            <strong>bloqueio hormonal do metabolismo</strong>. Cortisol alto,
+            insulina elevada e tireoide lenta colocam seu corpo em{" "}
+            <em>modo economia</em> e tudo vira gordura estocada.
           </p>
-          <p>
-            O verdadeiro vilão se chama{" "}
-            <strong>bloqueio hormonal do metabolismo</strong>. Quando seus
-            hormônios entram em desequilíbrio (cortisol alto, insulina elevada,
-            tireoide lenta), seu corpo entra em <em>modo economia</em> — e
-            qualquer caloria a mais é estocada como gordura, principalmente na
-            barriga e nos quadris.
-          </p>
-          <p>
-            O <strong>Protocolo Termo Hormonal</strong> foi criado para virar
-            essa chave. Ele combina ativação termogênica, ajustes alimentares
-            estratégicos e estímulo hormonal natural para destravar seu
-            metabolismo em poucos dias.
-          </p>
-
-          <div className="rounded-2xl border border-border bg-secondary/40 p-6">
-            <p className="font-semibold text-foreground mb-4">
-              O protocolo resolve de uma vez:
-            </p>
-            <ul className="space-y-3">
-              {[
-                "Metabolismo desacelerado e sensação de cansaço constante",
-                "Retenção de líquido e inchaço, principalmente nas pernas e barriga",
-                "Compulsão por doces e fome fora de hora",
-                "Gordura localizada que não sai com dieta nem exercício",
-                "Bloqueio hormonal causado por estresse, idade ou menopausa",
-                "Frustração com balanças que não saem do lugar",
-              ].map((item) => (
-                <li key={item} className="flex gap-3">
-                  <CheckCircle2
-                    className="h-6 w-6 shrink-0 mt-0.5"
-                    style={{ color: "var(--brand)" }}
-                  />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <p>
-            E o melhor: <strong>sem dietas malucas, sem remédios e sem passar fome.</strong>{" "}
-            Apenas seguindo um passo a passo simples, criado por especialistas e
-            já validado por milhares de mulheres que vivem hoje no corpo que
-            sempre quiseram.
+          <p className="mt-4 text-lg text-foreground/80 leading-relaxed">
+            O <strong>Protocolo Termo Hormonal</strong> destrava esse bloqueio em
+            poucos dias — <strong>sem dieta, sem remédio, sem passar fome.</strong>
           </p>
         </div>
-        <div className="mt-10 flex justify-center">
+
+        {/* Bubbles de problemas resolvidos */}
+        <div className="mt-12">
+          <p className="text-center text-sm font-bold uppercase tracking-widest mb-8" style={{ color: "var(--brand)" }}>
+            O que o protocolo resolve
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
+            {[
+              { icon: Zap, label: "Metabolismo lento e cansaço" },
+              { icon: Droplet, label: "Retenção de líquido e inchaço" },
+              { icon: Cookie, label: "Compulsão por doces" },
+              { icon: Target, label: "Gordura localizada teimosa" },
+              { icon: AlertTriangle, label: "Bloqueio hormonal" },
+              { icon: Scale, label: "Balança travada" },
+            ].map(({ icon: Icon, label }) => (
+              <div
+                key={label}
+                className="group flex flex-col items-center text-center rounded-2xl bg-card border border-border p-5 hover:-translate-y-1 hover:shadow-xl transition"
+              >
+                <div
+                  className="flex h-16 w-16 items-center justify-center rounded-full mb-3 group-hover:scale-110 transition"
+                  style={{ background: "var(--gradient-brand)", boxShadow: "var(--shadow-brand)" }}
+                >
+                  <Icon className="h-8 w-8 text-white" />
+                </div>
+                <span className="text-sm font-semibold text-foreground/85 leading-snug">
+                  {label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-12 flex justify-center">
           <PulseButton href="#planos">QUERO DESTRAVAR MEU METABOLISMO</PulseButton>
         </div>
       </section>
