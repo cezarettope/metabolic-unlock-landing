@@ -223,8 +223,38 @@ function LandingPage() {
                 +500 mil pessoas já ativaram esse protocolo e destravaram o
                 metabolismo.
               </p>
-              <div className="mt-8 flex justify-center md:justify-start">
-                <PulseButton href="#planos">QUERO ACESSAR O PROTOCOLO AGORA</PulseButton>
+
+              {/* MINI OFERTA */}
+              <div className="mt-7 rounded-2xl border border-white/15 bg-white/5 backdrop-blur p-5 max-w-xl">
+                <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "var(--brand)" }}>
+                  No protocolo você recebe:
+                </p>
+                <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm text-white/90">
+                  {[
+                    "Guia Inicial completo",
+                    "Direcionamento Alimentar",
+                    "Treinos de Ativação",
+                    "Mentor Nutricional 24h",
+                    "Bônus exclusivos",
+                    "30 dias de garantia",
+                  ].map((b) => (
+                    <li key={b} className="flex items-center gap-2">
+                      <CheckCircle2 className="h-4 w-4 shrink-0" style={{ color: "var(--brand)" }} />
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-4 flex items-baseline gap-2">
+                  <span className="text-xs text-white/60 line-through">De R$ 197</span>
+                  <span className="text-2xl font-extrabold text-white">Por R$ 37,00</span>
+                  <span className="text-xs text-white/60">à vista</span>
+                </div>
+              </div>
+
+              <div className="mt-6 flex justify-center md:justify-start">
+                <PulseButton href={`https://go.perfectpay.com.br/PPU38CQB25T${UTM}`}>
+                  QUERO ACESSAR O PROTOCOLO AGORA
+                </PulseButton>
               </div>
               <div className="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-2 text-xs text-white/70">
                 <span className="inline-flex items-center gap-1.5">
