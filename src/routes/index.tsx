@@ -18,6 +18,11 @@ import expertImg from "@/assets/expert.png";
 import dep1 from "@/assets/depoimento-1.png";
 import dep2 from "@/assets/depoimento-2.png";
 import dep3 from "@/assets/depoimento-3.png";
+import ad1 from "@/assets/antes-depois-1.png";
+import ad2 from "@/assets/antes-depois-2.png";
+import ad3 from "@/assets/antes-depois-3.png";
+import ad4 from "@/assets/antes-depois-4.png";
+import ad5 from "@/assets/antes-depois-5.png";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -474,6 +479,55 @@ function LandingPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ANTES E DEPOIS — Marquee automático */}
+      <section className="py-20 bg-background overflow-hidden">
+        <div className="mx-auto max-w-6xl px-6 text-center mb-10">
+          <p className="text-sm font-bold uppercase tracking-widest" style={{ color: "var(--brand)" }}>
+            Transformações reais
+          </p>
+          <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold">
+            Antes e Depois de quem aplicou o Protocolo
+          </h2>
+          <p className="mt-3 text-foreground/70 max-w-2xl mx-auto">
+            Resultados reais de mulheres que destravaram o metabolismo e mudaram de vida.
+          </p>
+        </div>
+
+        <div className="relative w-full overflow-hidden">
+          {/* fade edges */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 z-10 bg-gradient-to-r from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 z-10 bg-gradient-to-l from-background to-transparent" />
+
+          <div className="marquee-track flex gap-6 w-max">
+            {[...Array(2)].map((_, dup) =>
+              [ad1, ad2, ad3, ad4, ad5].map((img, i) => (
+                <div
+                  key={`${dup}-${i}`}
+                  className="relative shrink-0 w-[280px] sm:w-[340px] rounded-2xl overflow-hidden shadow-xl border-2"
+                  style={{ borderColor: "var(--brand)" }}
+                >
+                  <img
+                    src={img}
+                    alt={`Antes e depois ${i + 1}`}
+                    className="w-full h-[420px] object-cover"
+                  />
+                  <div
+                    className="absolute top-3 left-3 rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white"
+                    style={{ background: "var(--gradient-brand)" }}
+                  >
+                    Antes ➜ Depois
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+
+        <div className="mt-10 flex justify-center px-6">
+          <PulseButton href="#planos">QUERO MINHA TRANSFORMAÇÃO</PulseButton>
         </div>
       </section>
 
