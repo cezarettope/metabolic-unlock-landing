@@ -18,6 +18,11 @@ import expertImg from "@/assets/expert.png";
 import dep1 from "@/assets/depoimento-1.png";
 import dep2 from "@/assets/depoimento-2.png";
 import dep3 from "@/assets/depoimento-3.png";
+import ad1 from "@/assets/antes-depois-1.png";
+import ad2 from "@/assets/antes-depois-2.png";
+import ad3 from "@/assets/antes-depois-3.png";
+import ad4 from "@/assets/antes-depois-4.png";
+import ad5 from "@/assets/antes-depois-5.png";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
