@@ -66,11 +66,24 @@
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-sans: 'Inter', system-ui, sans-serif;
   --animate-pulse-cta: pulse-cta 1.8s ease-in-out infinite;
+  --animate-marquee: marquee 40s linear infinite;
 }
 
 @keyframes pulse-cta {
   0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--brand) 60%, transparent); transform: scale(1); }
   50% { box-shadow: 0 0 0 18px color-mix(in oklab, var(--brand) 0%, transparent); transform: scale(1.02); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
 }
 
 :root {
