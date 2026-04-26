@@ -11,8 +11,13 @@ import {
   Lock,
   Clock,
   TrendingDown,
-  Check,
   CheckCheck,
+  Zap,
+  Droplet,
+  Cookie,
+  Target,
+  AlertTriangle,
+  Scale,
 } from "lucide-react";
 import expertImg from "@/assets/expert.png";
 import dep1 from "@/assets/depoimento-1.png";
