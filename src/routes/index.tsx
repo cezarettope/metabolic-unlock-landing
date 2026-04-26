@@ -476,9 +476,6 @@ function LandingPage() {
           </div>
         </div>
       </section>
-          </div>
-        </div>
-      </section>
 
       {/* OFERTA / PLANOS */}
       <section
