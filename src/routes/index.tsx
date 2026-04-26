@@ -392,42 +392,90 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* PROVA SOCIAL */}
-      <section className="py-20">
+      {/* PROVA SOCIAL — WhatsApp style */}
+      <section className="py-20" style={{ background: "#ECE5DD" }}>
         <div className="mx-auto max-w-6xl px-6">
           <div className="text-center mb-12">
             <p className="text-sm font-bold uppercase tracking-widest" style={{ color: "var(--brand)" }}>
               Histórias reais
             </p>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold">
-              Resultados de quem aplicou o protocolo
+            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-foreground">
+              Mensagens reais de quem aplicou o protocolo
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {TESTIMONIALS.map((t) => (
-              <figure
+              <div
                 key={t.name}
-                className="rounded-2xl border border-border bg-card p-6 flex flex-col"
+                className="rounded-2xl overflow-hidden shadow-2xl bg-white flex flex-col"
               >
-                <div className="flex gap-0.5 mb-3" style={{ color: "var(--brand)" }}>
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-current" />
+                {/* WhatsApp header */}
+                <div
+                  className="flex items-center gap-3 px-4 py-3 text-white"
+                  style={{ background: "#075E54" }}
+                >
+                  <img
+                    src={t.photo}
+                    alt={t.name}
+                    className="h-10 w-10 rounded-full object-cover border-2 border-white/30"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="font-bold text-sm truncate">{t.name}</div>
+                    <div className="text-[11px] text-white/80">online</div>
+                  </div>
+                  <div
+                    className="text-[10px] font-bold px-2 py-0.5 rounded-full"
+                    style={{ background: "var(--brand)" }}
+                  >
+                    {t.result}
+                  </div>
+                </div>
+
+                {/* Chat body */}
+                <div
+                  className="flex-1 p-4 space-y-2 min-h-[280px]"
+                  style={{
+                    background:
+                      "#ECE5DD url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='20' cy='20' r='1' fill='%23d4ccc1'/></svg>\")",
+                  }}
+                >
+                  {t.messages.map((m, i) => (
+                    <div key={i} className="flex">
+                      <div
+                        className="relative max-w-[85%] rounded-lg px-3 py-2 text-sm text-foreground shadow-sm"
+                        style={{ background: "#FFFFFF" }}
+                      >
+                        <p className="leading-snug">{m.text}</p>
+                        <div className="flex items-center justify-end gap-1 mt-1">
+                          <span className="text-[10px] text-foreground/50">
+                            {t.time}
+                          </span>
+                          <CheckCheck className="h-3 w-3 text-[#34B7F1]" />
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </div>
-                <blockquote className="text-foreground/85 leading-relaxed flex-1">
-                  "{t.text}"
-                </blockquote>
-                <figcaption className="mt-5 pt-4 border-t border-border">
-                  <div className="font-bold">{t.name}</div>
+
+                {/* Footer badge */}
+                <div className="bg-white px-4 py-3 border-t border-border flex items-center justify-between">
+                  <div className="flex gap-0.5" style={{ color: "var(--brand)" }}>
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="h-3.5 w-3.5 fill-current" />
+                    ))}
+                  </div>
                   <div
-                    className="text-sm font-semibold inline-flex items-center gap-1 mt-1"
+                    className="text-xs font-bold inline-flex items-center gap-1"
                     style={{ color: "var(--brand)" }}
                   >
-                    <TrendingDown className="h-4 w-4" /> {t.result}
+                    <TrendingDown className="h-3.5 w-3.5" /> {t.result}
                   </div>
-                </figcaption>
-              </figure>
+                </div>
+              </div>
             ))}
+          </div>
+        </div>
+      </section>
           </div>
         </div>
       </section>
