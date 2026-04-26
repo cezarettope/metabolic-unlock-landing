@@ -62,9 +62,16 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0.75rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.18 0.01 260);
+  --brand: oklch(0.68 0.22 38);
+  --brand-foreground: oklch(1 0 0);
+  --brand-glow: oklch(0.78 0.18 50);
+  --dark: oklch(0.22 0.01 260);
+  --gradient-brand: linear-gradient(135deg, oklch(0.68 0.22 38), oklch(0.74 0.2 50));
+  --gradient-dark: linear-gradient(180deg, oklch(0.22 0.01 260), oklch(0.14 0.01 260));
+  --shadow-brand: 0 10px 30px -8px color-mix(in oklab, oklch(0.68 0.22 38) 55%, transparent);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
