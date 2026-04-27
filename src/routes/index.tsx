@@ -626,6 +626,10 @@ function LandingPage() {
                     src={t.photo}
                     alt={t.name}
                     className="h-10 w-10 rounded-full object-cover border-2 border-white/30"
+                    width={40}
+                    height={40}
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="flex-1 min-w-0">
                     <div className="font-bold text-sm truncate">{t.name}</div>
