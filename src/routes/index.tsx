@@ -248,54 +248,63 @@ function LandingPage() {
                 Protocolo Termo Hormonal
               </span>
               <h1 className="mt-6 text-3xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05]">
-                DESBLOQUEIE O EMAGRECIMENTO QUE{" "}
-                <span style={{ color: "var(--brand)" }}>SEU CORPO ESCONDE</span>
+                EMAGREÇA COM O{" "}
+                <span style={{ color: "var(--brand)" }}>PROTOCOLO TERMO HORMONAL</span>
               </h1>
               <p className="mt-5 text-lg sm:text-xl font-medium text-white/85 max-w-2xl">
-                O <strong>Protocolo Termo Hormonal</strong> usa ativação metabólica em{" "}
-                <strong style={{ color: "var(--brand)" }}>3 etapas</strong> para destravar a queima de gordura mesmo com cortisol alto — sem dieta, sem remédio, sem passar fome.
+                Ative a queima de gordura em <strong style={{ color: "var(--brand)" }}>3 etapas simples</strong> e destrave o metabolismo bloqueado pelo cortisol —{" "}
+                <strong>resultados visíveis já nas primeiras semanas</strong>, sem dieta restritiva, sem remédio e sem passar fome.
               </p>
 
-              {/* PRICE ANCHOR OFFER */}
-              <div className="mt-7 rounded-2xl border-2 p-6 max-w-xl backdrop-blur"
-                style={{ borderColor: "var(--brand)", background: "rgba(255,107,53,0.06)" }}
-              >
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white"
-                    style={{ background: "var(--gradient-brand)" }}>
-                    Oferta de lançamento
-                  </span>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-white/70">
-                    81% OFF
-                  </span>
-                </div>
-                <div className="flex items-baseline gap-3 flex-wrap">
-                  <span className="text-base text-white/50 line-through decoration-2">
-                    De R$ 197,00
-                  </span>
-                  <span className="text-xs text-white/60">por apenas</span>
-                </div>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-5xl sm:text-6xl font-extrabold" style={{ color: "var(--brand)" }}>
-                    R$ 37
-                  </span>
-                  <span className="text-2xl font-extrabold text-white">,00</span>
-                  <span className="text-sm text-white/70 ml-1">à vista</span>
-                </div>
-                <p className="mt-2 text-xs text-white/70">
-                  ou <strong className="text-white">12x de R$ 3,75</strong> no cartão
-                </p>
-                <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-white/60">
-                  <span className="inline-flex items-center gap-1"><Lock className="h-3 w-3" /> Pagamento seguro</span>
-                  <span className="inline-flex items-center gap-1"><ShieldCheck className="h-3 w-3" /> 30 dias garantia</span>
-                  <span className="inline-flex items-center gap-1"><Clock className="h-3 w-3" /> Acesso imediato</span>
-                </div>
-              </div>
-
-              <div className="mt-6 flex justify-center md:justify-start">
-                <PulseButton href={`https://go.perfectpay.com.br/PPU38CQB25T${UTM}`}>
-                  QUERO ACESSAR O PROTOCOLO AGORA
-                </PulseButton>
+              {/* CTA PLANS — direto na headline */}
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
+                {PLANS.map((p) => (
+                  <a
+                    key={`headline-${p.name}`}
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`relative rounded-3xl p-6 flex flex-col text-left transition hover:scale-[1.02] ${
+                      p.highlight
+                        ? "bg-white text-foreground shadow-2xl"
+                        : "bg-white/5 border border-white/15 text-white"
+                    }`}
+                  >
+                    {p.badge && (
+                      <span
+                        className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-4 py-1 text-[10px] font-extrabold tracking-wider text-white whitespace-nowrap"
+                        style={{ background: "var(--gradient-brand)" }}
+                      >
+                        {p.badge}
+                      </span>
+                    )}
+                    <h3 className={`text-lg font-extrabold ${p.highlight ? "" : "text-white"}`}>{p.name}</h3>
+                    <div className={`mt-3 text-3xl font-extrabold ${p.highlight ? "" : "text-white"}`}>
+                      {p.price}
+                    </div>
+                    <div className={`text-[11px] mt-1 ${p.highlight ? "text-muted-foreground" : "text-white/60"}`}>
+                      Pagamento único · Acesso imediato
+                    </div>
+                    <ul className="mt-4 space-y-2 flex-1">
+                      {p.features.map((f) => (
+                        <li key={f} className="flex gap-2 text-xs">
+                          <CheckCircle2 className="h-4 w-4 shrink-0" style={{ color: "var(--brand)" }} />
+                          <span className={p.highlight ? "" : "text-white/85"}>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div
+                      className={`mt-5 inline-flex items-center justify-center w-full rounded-full py-3 font-extrabold uppercase tracking-wide text-xs sm:text-sm ${
+                        p.highlight
+                          ? "text-white animate-pulse-cta"
+                          : "bg-white/10 text-white border border-white/20"
+                      }`}
+                      style={p.highlight ? { background: "var(--gradient-brand)" } : undefined}
+                    >
+                      {p.cta}
+                    </div>
+                  </a>
+                ))}
               </div>
               <div className="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-2 text-xs text-white/70">
                 <span className="inline-flex items-center gap-1.5">
