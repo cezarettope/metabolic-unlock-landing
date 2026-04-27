@@ -472,7 +472,11 @@ function LandingPage() {
                   <img
                     src={img}
                     alt={`Antes e depois ${i + 1}`}
-                    className="w-full h-[420px] object-cover"
+                    className="w-full h-[360px] sm:h-[420px] object-cover"
+                    width={340}
+                    height={420}
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div
                     className="absolute top-3 left-3 rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white"
