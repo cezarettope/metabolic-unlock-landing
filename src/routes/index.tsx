@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import {
   Flame,
   CheckCircle2,
@@ -65,20 +66,33 @@ const PLANS = [
     cta: "QUERO O PROTOCOLO",
     highlight: true,
   },
-  {
-    name: "Consulta com o Mentor",
-    price: "R$ 29,90",
-    badge: "PREMIUM",
-    url: `https://go.perfectpay.com.br/PPU38CQB262${UTM}`,
-    features: [
-      "Atendimento personalizado",
-      "Plano sob medida",
-      "Acompanhamento próximo",
-    ],
-    cta: "QUERO ATENDIMENTO",
-    highlight: false,
-  },
 ];
+
+function useCountdown() {
+  const [t, setT] = useState({ h: "00", m: "00", s: "00", date: "--/--" });
+  useEffect(() => {
+    const update = () => {
+      const now = new Date();
+      const midnight = new Date();
+      midnight.setHours(23, 59, 59, 999);
+      const diff = midnight.getTime() - now.getTime();
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      const pad = (n: number) => String(n).padStart(2, "0");
+      setT({
+        h: pad(h),
+        m: pad(m),
+        s: pad(s),
+        date: now.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" }),
+      });
+    };
+    update();
+    const id = setInterval(update, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return t;
+}
 
 const PILLARS = [
   {
@@ -191,6 +205,7 @@ function PulseButton({
 }
 
 function LandingPage() {
+  const timer = useCountdown();
   return (
     <main className="min-h-screen bg-background text-foreground">
       {/* HERO */}
@@ -217,11 +232,8 @@ function LandingPage() {
                 <span style={{ color: "var(--brand)" }}>SEU CORPO ESCONDE</span>
               </h1>
               <p className="mt-5 text-lg sm:text-xl font-medium text-white/85 max-w-2xl">
-                Ative seu metabolismo e perca peso de forma natural.
-              </p>
-              <p className="mt-4 text-sm sm:text-base text-white/70 max-w-xl">
-                +500 mil pessoas já ativaram esse protocolo e destravaram o
-                metabolismo.
+                O <strong>Protocolo Termo Hormonal</strong> usa ativação metabólica em{" "}
+                <strong style={{ color: "var(--brand)" }}>3 etapas</strong> para destravar a queima de gordura mesmo com cortisol alto — sem dieta, sem remédio, sem passar fome.
               </p>
 
               {/* MINI OFERTA */}
@@ -288,8 +300,11 @@ function LandingPage() {
                 />
               </div>
               <div className="mt-3 text-center md:text-right">
-                <p className="text-sm font-bold text-white">Sua Mentora Especialista</p>
-                <p className="text-xs text-white/70">Nutrição & Saúde Hormonal</p>
+                <p className="text-base font-extrabold text-white">Amanda Albuquerque</p>
+                <p className="text-xs text-white/80">Nutricionista — CRN 10-34821</p>
+                <p className="text-[11px] text-white/60 max-w-[260px]">
+                  Especialista em Saúde Hormonal & Emagrecimento Metabólico
+                </p>
               </div>
             </div>
           </div>
