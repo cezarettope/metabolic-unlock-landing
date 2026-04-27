@@ -248,54 +248,63 @@ function LandingPage() {
                 Protocolo Termo Hormonal
               </span>
               <h1 className="mt-6 text-3xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05]">
-                DESBLOQUEIE O EMAGRECIMENTO QUE{" "}
-                <span style={{ color: "var(--brand)" }}>SEU CORPO ESCONDE</span>
+                EMAGREÇA COM O{" "}
+                <span style={{ color: "var(--brand)" }}>PROTOCOLO TERMO HORMONAL</span>
               </h1>
               <p className="mt-5 text-lg sm:text-xl font-medium text-white/85 max-w-2xl">
-                O <strong>Protocolo Termo Hormonal</strong> usa ativação metabólica em{" "}
-                <strong style={{ color: "var(--brand)" }}>3 etapas</strong> para destravar a queima de gordura mesmo com cortisol alto — sem dieta, sem remédio, sem passar fome.
+                Ative a queima de gordura em <strong style={{ color: "var(--brand)" }}>3 etapas simples</strong> e destrave o metabolismo bloqueado pelo cortisol —{" "}
+                <strong>resultados visíveis já nas primeiras semanas</strong>, sem dieta restritiva, sem remédio e sem passar fome.
               </p>
 
-              {/* PRICE ANCHOR OFFER */}
-              <div className="mt-7 rounded-2xl border-2 p-6 max-w-xl backdrop-blur"
-                style={{ borderColor: "var(--brand)", background: "rgba(255,107,53,0.06)" }}
-              >
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white"
-                    style={{ background: "var(--gradient-brand)" }}>
-                    Oferta de lançamento
-                  </span>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-white/70">
-                    81% OFF
-                  </span>
-                </div>
-                <div className="flex items-baseline gap-3 flex-wrap">
-                  <span className="text-base text-white/50 line-through decoration-2">
-                    De R$ 197,00
-                  </span>
-                  <span className="text-xs text-white/60">por apenas</span>
-                </div>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-5xl sm:text-6xl font-extrabold" style={{ color: "var(--brand)" }}>
-                    R$ 37
-                  </span>
-                  <span className="text-2xl font-extrabold text-white">,00</span>
-                  <span className="text-sm text-white/70 ml-1">à vista</span>
-                </div>
-                <p className="mt-2 text-xs text-white/70">
-                  ou <strong className="text-white">12x de R$ 3,75</strong> no cartão
-                </p>
-                <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-white/60">
-                  <span className="inline-flex items-center gap-1"><Lock className="h-3 w-3" /> Pagamento seguro</span>
-                  <span className="inline-flex items-center gap-1"><ShieldCheck className="h-3 w-3" /> 30 dias garantia</span>
-                  <span className="inline-flex items-center gap-1"><Clock className="h-3 w-3" /> Acesso imediato</span>
-                </div>
-              </div>
-
-              <div className="mt-6 flex justify-center md:justify-start">
-                <PulseButton href={`https://go.perfectpay.com.br/PPU38CQB25T${UTM}`}>
-                  QUERO ACESSAR O PROTOCOLO AGORA
-                </PulseButton>
+              {/* CTA PLANS — direto na headline */}
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
+                {PLANS.map((p) => (
+                  <a
+                    key={`headline-${p.name}`}
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`relative rounded-3xl p-6 flex flex-col text-left transition hover:scale-[1.02] ${
+                      p.highlight
+                        ? "bg-white text-foreground shadow-2xl"
+                        : "bg-white/5 border border-white/15 text-white"
+                    }`}
+                  >
+                    {p.badge && (
+                      <span
+                        className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-4 py-1 text-[10px] font-extrabold tracking-wider text-white whitespace-nowrap"
+                        style={{ background: "var(--gradient-brand)" }}
+                      >
+                        {p.badge}
+                      </span>
+                    )}
+                    <h3 className={`text-lg font-extrabold ${p.highlight ? "" : "text-white"}`}>{p.name}</h3>
+                    <div className={`mt-3 text-3xl font-extrabold ${p.highlight ? "" : "text-white"}`}>
+                      {p.price}
+                    </div>
+                    <div className={`text-[11px] mt-1 ${p.highlight ? "text-muted-foreground" : "text-white/60"}`}>
+                      Pagamento único · Acesso imediato
+                    </div>
+                    <ul className="mt-4 space-y-2 flex-1">
+                      {p.features.map((f) => (
+                        <li key={f} className="flex gap-2 text-xs">
+                          <CheckCircle2 className="h-4 w-4 shrink-0" style={{ color: "var(--brand)" }} />
+                          <span className={p.highlight ? "" : "text-white/85"}>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div
+                      className={`mt-5 inline-flex items-center justify-center w-full rounded-full py-3 font-extrabold uppercase tracking-wide text-xs sm:text-sm ${
+                        p.highlight
+                          ? "text-white animate-pulse-cta"
+                          : "bg-white/10 text-white border border-white/20"
+                      }`}
+                      style={p.highlight ? { background: "var(--gradient-brand)" } : undefined}
+                    >
+                      {p.cta}
+                    </div>
+                  </a>
+                ))}
               </div>
               <div className="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-2 text-xs text-white/70">
                 <span className="inline-flex items-center gap-1.5">
@@ -338,119 +347,6 @@ function LandingPage() {
                   +7 anos atuando · desde 2018
                 </p>
               </div>
-            </div>
-          </div>
-
-          {/* QUICK PLANS CTA after headline */}
-          <div className="mt-14">
-            <p className="text-center text-xs font-bold uppercase tracking-widest text-white/70 mb-4">
-              Escolha seu acesso e comece agora
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
-              {PLANS.map((p) => (
-                <a
-                  key={`hero-${p.name}`}
-                  href={p.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`relative rounded-2xl p-4 flex flex-col items-center text-center transition hover:scale-[1.02] ${
-                    p.highlight
-                      ? "bg-white text-foreground shadow-2xl"
-                      : "bg-white/10 border border-white/20 text-white hover:bg-white/15"
-                  }`}
-                >
-                  {p.badge && (
-                    <span
-                      className="absolute -top-2 left-1/2 -translate-x-1/2 rounded-full px-3 py-0.5 text-[10px] font-extrabold tracking-wider text-white whitespace-nowrap"
-                      style={{ background: "var(--gradient-brand)" }}
-                    >
-                      {p.badge}
-                    </span>
-                  )}
-                  <div className="text-xs font-bold uppercase tracking-wide mt-1 opacity-80">
-                    {p.name}
-                  </div>
-                  <div className="text-2xl font-extrabold mt-1">{p.price}</div>
-                  <div
-                    className={`mt-3 text-[11px] font-extrabold uppercase tracking-wider rounded-full px-3 py-1.5 ${
-                      p.highlight ? "text-white" : "bg-white/15"
-                    }`}
-                    style={p.highlight ? { background: "var(--gradient-brand)" } : undefined}
-                  >
-                    {p.cta} →
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* AMANDA SHOWCASE — Banner grande */}
-      <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: "linear-gradient(135deg, #2a0a0a 0%, #4a1503 50%, #1a0505 100%)" }}>
-        <div
-          className="absolute inset-0 opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(50% 60% at 80% 50%, var(--brand) 0%, transparent 70%)" }}
-        />
-        <div className="relative mx-auto max-w-6xl px-6 grid md:grid-cols-2 gap-10 items-center">
-          <div className="text-white">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider">
-              <Star className="h-4 w-4 fill-current" style={{ color: "var(--brand)" }} />
-              Conheça sua especialista
-            </span>
-            <h2 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05]">
-              Amanda <span style={{ color: "var(--brand)" }}>Albuquerque</span>
-            </h2>
-            <p className="mt-3 text-lg sm:text-xl font-semibold text-white/90">
-              Nutricionista · CRN 10-34821
-            </p>
-            <p className="mt-2 text-base text-white/75">
-              Especialista em Saúde Hormonal & Emagrecimento Metabólico
-            </p>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <div className="rounded-2xl border border-white/15 bg-white/5 px-4 py-3">
-                <p className="text-3xl font-extrabold" style={{ color: "var(--brand)" }}>+7</p>
-                <p className="text-[11px] uppercase tracking-wider text-white/70">anos de atuação</p>
-              </div>
-              <div className="rounded-2xl border border-white/15 bg-white/5 px-4 py-3">
-                <p className="text-3xl font-extrabold" style={{ color: "var(--brand)" }}>2018</p>
-                <p className="text-[11px] uppercase tracking-wider text-white/70">desde</p>
-              </div>
-              <div className="rounded-2xl border border-white/15 bg-white/5 px-4 py-3">
-                <p className="text-3xl font-extrabold" style={{ color: "var(--brand)" }}>+10mil</p>
-                <p className="text-[11px] uppercase tracking-wider text-white/70">mulheres atendidas</p>
-              </div>
-            </div>
-
-            <p className="mt-6 text-base text-white/85 leading-relaxed">
-              Desde <strong>2018</strong>, Amanda dedica sua carreira a ajudar mulheres a destravar o
-              metabolismo bloqueado por desequilíbrios hormonais. Após anos de pesquisa e prática
-              clínica, ela criou o <strong style={{ color: "var(--brand)" }}>Protocolo Termo Hormonal</strong> — o método
-              que já transformou a vida de milhares de alunas.
-            </p>
-
-            <div className="mt-7">
-              <PulseButton href={`https://go.perfectpay.com.br/PPU38CQB25T${UTM}`}>
-                QUERO O MÉTODO DA AMANDA
-              </PulseButton>
-            </div>
-          </div>
-
-          <div className="relative">
-            <div
-              className="absolute -inset-4 rounded-[2.5rem] opacity-40 blur-2xl"
-              style={{ background: "var(--gradient-brand)" }}
-            />
-            <div
-              className="relative rounded-[2rem] overflow-hidden border-4"
-              style={{ borderColor: "var(--brand)", boxShadow: "var(--shadow-brand)" }}
-            >
-              <img
-                src={expertImg}
-                alt="Amanda Albuquerque, nutricionista especialista em saúde hormonal"
-                className="w-full h-auto object-cover"
-              />
             </div>
           </div>
         </div>
@@ -536,91 +432,6 @@ function LandingPage() {
                 </div>
                 <h3 className="text-lg font-bold mb-2">{title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PROVA SOCIAL — WhatsApp style */}
-      <section className="py-20" style={{ background: "#ECE5DD" }}>
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="text-center mb-12">
-            <p className="text-sm font-bold uppercase tracking-widest" style={{ color: "var(--brand)" }}>
-              Histórias reais
-            </p>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-foreground">
-              Mensagens reais de quem aplicou o protocolo
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((t) => (
-              <div
-                key={t.name}
-                className="rounded-2xl overflow-hidden shadow-2xl bg-white flex flex-col"
-              >
-                {/* WhatsApp header */}
-                <div
-                  className="flex items-center gap-3 px-4 py-3 text-white"
-                  style={{ background: "#075E54" }}
-                >
-                  <img
-                    src={t.photo}
-                    alt={t.name}
-                    className="h-10 w-10 rounded-full object-cover border-2 border-white/30"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <div className="font-bold text-sm truncate">{t.name}</div>
-                    <div className="text-[11px] text-white/80">online</div>
-                  </div>
-                  <div
-                    className="text-[10px] font-bold px-2 py-0.5 rounded-full"
-                    style={{ background: "var(--brand)" }}
-                  >
-                    {t.result}
-                  </div>
-                </div>
-
-                {/* Chat body */}
-                <div
-                  className="flex-1 p-4 space-y-2 min-h-[280px]"
-                  style={{
-                    background:
-                      "#ECE5DD url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='20' cy='20' r='1' fill='%23d4ccc1'/></svg>\")",
-                  }}
-                >
-                  {t.messages.map((m, i) => (
-                    <div key={i} className="flex">
-                      <div
-                        className="relative max-w-[85%] rounded-lg px-3 py-2 text-sm text-foreground shadow-sm"
-                        style={{ background: "#FFFFFF" }}
-                      >
-                        <p className="leading-snug">{m.text}</p>
-                        <div className="flex items-center justify-end gap-1 mt-1">
-                          <span className="text-[10px] text-foreground/50">
-                            {t.time}
-                          </span>
-                          <CheckCheck className="h-3 w-3 text-[#34B7F1]" />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Footer badge */}
-                <div className="bg-white px-4 py-3 border-t border-border flex items-center justify-between">
-                  <div className="flex gap-0.5" style={{ color: "var(--brand)" }}>
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-3.5 w-3.5 fill-current" />
-                    ))}
-                  </div>
-                  <div
-                    className="text-xs font-bold inline-flex items-center gap-1"
-                    style={{ color: "var(--brand)" }}
-                  >
-                    <TrendingDown className="h-3.5 w-3.5" /> {t.result}
-                  </div>
-                </div>
               </div>
             ))}
           </div>
@@ -781,6 +592,91 @@ function LandingPage() {
         </div>
       </section>
 
+      {/* PROVA SOCIAL — WhatsApp style */}
+      <section className="py-20" style={{ background: "#ECE5DD" }}>
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center mb-12">
+            <p className="text-sm font-bold uppercase tracking-widest" style={{ color: "var(--brand)" }}>
+              Histórias reais
+            </p>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-foreground">
+              Mensagens reais de quem aplicou o protocolo
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {TESTIMONIALS.map((t) => (
+              <div
+                key={t.name}
+                className="rounded-2xl overflow-hidden shadow-2xl bg-white flex flex-col"
+              >
+                {/* WhatsApp header */}
+                <div
+                  className="flex items-center gap-3 px-4 py-3 text-white"
+                  style={{ background: "#075E54" }}
+                >
+                  <img
+                    src={t.photo}
+                    alt={t.name}
+                    className="h-10 w-10 rounded-full object-cover border-2 border-white/30"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="font-bold text-sm truncate">{t.name}</div>
+                    <div className="text-[11px] text-white/80">online</div>
+                  </div>
+                  <div
+                    className="text-[10px] font-bold px-2 py-0.5 rounded-full"
+                    style={{ background: "var(--brand)" }}
+                  >
+                    {t.result}
+                  </div>
+                </div>
+
+                {/* Chat body */}
+                <div
+                  className="flex-1 p-4 space-y-2 min-h-[280px]"
+                  style={{
+                    background:
+                      "#ECE5DD url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='20' cy='20' r='1' fill='%23d4ccc1'/></svg>\")",
+                  }}
+                >
+                  {t.messages.map((m, i) => (
+                    <div key={i} className="flex">
+                      <div
+                        className="relative max-w-[85%] rounded-lg px-3 py-2 text-sm text-foreground shadow-sm"
+                        style={{ background: "#FFFFFF" }}
+                      >
+                        <p className="leading-snug">{m.text}</p>
+                        <div className="flex items-center justify-end gap-1 mt-1">
+                          <span className="text-[10px] text-foreground/50">
+                            {t.time}
+                          </span>
+                          <CheckCheck className="h-3 w-3 text-[#34B7F1]" />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Footer badge */}
+                <div className="bg-white px-4 py-3 border-t border-border flex items-center justify-between">
+                  <div className="flex gap-0.5" style={{ color: "var(--brand)" }}>
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="h-3.5 w-3.5 fill-current" />
+                    ))}
+                  </div>
+                  <div
+                    className="text-xs font-bold inline-flex items-center gap-1"
+                    style={{ color: "var(--brand)" }}
+                  >
+                    <TrendingDown className="h-3.5 w-3.5" /> {t.result}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* GARANTIA */}
       <section className="py-20">
         <div className="mx-auto max-w-3xl px-6">
@@ -853,6 +749,76 @@ function LandingPage() {
               <Clock className="h-3.5 w-3.5" />
               Liberação imediata após pagamento
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* AMANDA SHOWCASE — Banner grande */}
+      <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: "linear-gradient(135deg, #2a0a0a 0%, #4a1503 50%, #1a0505 100%)" }}>
+        <div
+          className="absolute inset-0 opacity-20 pointer-events-none"
+          style={{ background: "radial-gradient(50% 60% at 80% 50%, var(--brand) 0%, transparent 70%)" }}
+        />
+        <div className="relative mx-auto max-w-6xl px-6 grid md:grid-cols-2 gap-10 items-center">
+          <div className="text-white">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider">
+              <Star className="h-4 w-4 fill-current" style={{ color: "var(--brand)" }} />
+              Conheça sua especialista
+            </span>
+            <h2 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05]">
+              Amanda <span style={{ color: "var(--brand)" }}>Albuquerque</span>
+            </h2>
+            <p className="mt-3 text-lg sm:text-xl font-semibold text-white/90">
+              Nutricionista · CRN 10-34821
+            </p>
+            <p className="mt-2 text-base text-white/75">
+              Especialista em Saúde Hormonal & Emagrecimento Metabólico
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <div className="rounded-2xl border border-white/15 bg-white/5 px-4 py-3">
+                <p className="text-3xl font-extrabold" style={{ color: "var(--brand)" }}>+7</p>
+                <p className="text-[11px] uppercase tracking-wider text-white/70">anos de atuação</p>
+              </div>
+              <div className="rounded-2xl border border-white/15 bg-white/5 px-4 py-3">
+                <p className="text-3xl font-extrabold" style={{ color: "var(--brand)" }}>2018</p>
+                <p className="text-[11px] uppercase tracking-wider text-white/70">desde</p>
+              </div>
+              <div className="rounded-2xl border border-white/15 bg-white/5 px-4 py-3">
+                <p className="text-3xl font-extrabold" style={{ color: "var(--brand)" }}>+10mil</p>
+                <p className="text-[11px] uppercase tracking-wider text-white/70">mulheres atendidas</p>
+              </div>
+            </div>
+
+            <p className="mt-6 text-base text-white/85 leading-relaxed">
+              Desde <strong>2018</strong>, Amanda dedica sua carreira a ajudar mulheres a destravar o
+              metabolismo bloqueado por desequilíbrios hormonais. Após anos de pesquisa e prática
+              clínica, ela criou o <strong style={{ color: "var(--brand)" }}>Protocolo Termo Hormonal</strong> — o método
+              que já transformou a vida de milhares de alunas.
+            </p>
+
+            <div className="mt-7">
+              <PulseButton href={`https://go.perfectpay.com.br/PPU38CQB25T${UTM}`}>
+                QUERO O MÉTODO DA AMANDA
+              </PulseButton>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div
+              className="absolute -inset-4 rounded-[2.5rem] opacity-40 blur-2xl"
+              style={{ background: "var(--gradient-brand)" }}
+            />
+            <div
+              className="relative rounded-[2rem] overflow-hidden border-4"
+              style={{ borderColor: "var(--brand)", boxShadow: "var(--shadow-brand)" }}
+            >
+              <img
+                src={expertImg}
+                alt="Amanda Albuquerque, nutricionista especialista em saúde hormonal"
+                className="w-full h-auto object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
