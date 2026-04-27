@@ -386,6 +386,76 @@ function LandingPage() {
         </div>
       </section>
 
+      {/* AMANDA SHOWCASE — Banner grande */}
+      <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: "linear-gradient(135deg, #2a0a0a 0%, #4a1503 50%, #1a0505 100%)" }}>
+        <div
+          className="absolute inset-0 opacity-20 pointer-events-none"
+          style={{ background: "radial-gradient(50% 60% at 80% 50%, var(--brand) 0%, transparent 70%)" }}
+        />
+        <div className="relative mx-auto max-w-6xl px-6 grid md:grid-cols-2 gap-10 items-center">
+          <div className="text-white">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider">
+              <Star className="h-4 w-4 fill-current" style={{ color: "var(--brand)" }} />
+              Conheça sua especialista
+            </span>
+            <h2 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05]">
+              Amanda <span style={{ color: "var(--brand)" }}>Albuquerque</span>
+            </h2>
+            <p className="mt-3 text-lg sm:text-xl font-semibold text-white/90">
+              Nutricionista · CRN 10-34821
+            </p>
+            <p className="mt-2 text-base text-white/75">
+              Especialista em Saúde Hormonal & Emagrecimento Metabólico
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <div className="rounded-2xl border border-white/15 bg-white/5 px-4 py-3">
+                <p className="text-3xl font-extrabold" style={{ color: "var(--brand)" }}>+7</p>
+                <p className="text-[11px] uppercase tracking-wider text-white/70">anos de atuação</p>
+              </div>
+              <div className="rounded-2xl border border-white/15 bg-white/5 px-4 py-3">
+                <p className="text-3xl font-extrabold" style={{ color: "var(--brand)" }}>2018</p>
+                <p className="text-[11px] uppercase tracking-wider text-white/70">desde</p>
+              </div>
+              <div className="rounded-2xl border border-white/15 bg-white/5 px-4 py-3">
+                <p className="text-3xl font-extrabold" style={{ color: "var(--brand)" }}>+10mil</p>
+                <p className="text-[11px] uppercase tracking-wider text-white/70">mulheres atendidas</p>
+              </div>
+            </div>
+
+            <p className="mt-6 text-base text-white/85 leading-relaxed">
+              Desde <strong>2018</strong>, Amanda dedica sua carreira a ajudar mulheres a destravar o
+              metabolismo bloqueado por desequilíbrios hormonais. Após anos de pesquisa e prática
+              clínica, ela criou o <strong style={{ color: "var(--brand)" }}>Protocolo Termo Hormonal</strong> — o método
+              que já transformou a vida de milhares de alunas.
+            </p>
+
+            <div className="mt-7">
+              <PulseButton href={`https://go.perfectpay.com.br/PPU38CQB25T${UTM}`}>
+                QUERO O MÉTODO DA AMANDA
+              </PulseButton>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div
+              className="absolute -inset-4 rounded-[2.5rem] opacity-40 blur-2xl"
+              style={{ background: "var(--gradient-brand)" }}
+            />
+            <div
+              className="relative rounded-[2rem] overflow-hidden border-4"
+              style={{ borderColor: "var(--brand)", boxShadow: "var(--shadow-brand)" }}
+            >
+              <img
+                src={expertImg}
+                alt="Amanda Albuquerque, nutricionista especialista em saúde hormonal"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* TSL — versão resumida e visual */}
       <section className="mx-auto max-w-5xl px-6 py-20">
         <div className="text-center max-w-3xl mx-auto">
