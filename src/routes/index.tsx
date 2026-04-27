@@ -829,6 +829,10 @@ function LandingPage() {
                 src={expertImg}
                 alt="Amanda Albuquerque, nutricionista especialista em saúde hormonal"
                 className="w-full h-auto object-cover"
+                width={600}
+                height={750}
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
