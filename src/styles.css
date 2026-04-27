@@ -184,4 +184,10 @@
     font-family: var(--font-display);
     letter-spacing: -0.02em;
   }
+
+  /* Performance: skip rendering work for off-screen sections */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 800px;
+  }
 }

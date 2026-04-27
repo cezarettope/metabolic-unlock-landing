@@ -20,15 +20,15 @@ import {
   AlertTriangle,
   Scale,
 } from "lucide-react";
-import expertImg from "@/assets/expert.png";
-import dep1 from "@/assets/depoimento-1.png";
-import dep2 from "@/assets/depoimento-2.png";
-import dep3 from "@/assets/depoimento-3.png";
-import ad1 from "@/assets/antes-depois-1.png";
-import ad2 from "@/assets/antes-depois-2.png";
-import ad3 from "@/assets/antes-depois-3.png";
-import ad4 from "@/assets/antes-depois-4.png";
-import ad5 from "@/assets/antes-depois-5.png";
+import expertImg from "@/assets/expert.webp";
+import dep1 from "@/assets/depoimento-1.webp";
+import dep2 from "@/assets/depoimento-2.webp";
+import dep3 from "@/assets/depoimento-3.webp";
+import ad1 from "@/assets/antes-depois-1.webp";
+import ad2 from "@/assets/antes-depois-2.webp";
+import ad3 from "@/assets/antes-depois-3.webp";
+import ad4 from "@/assets/antes-depois-4.webp";
+import ad5 from "@/assets/antes-depois-5.webp";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -335,6 +335,10 @@ function LandingPage() {
                   src={expertImg}
                   alt="Mentora especialista do Protocolo Termo Hormonal"
                   className="h-full w-full object-cover"
+                  width={260}
+                  height={320}
+                  fetchPriority="high"
+                  decoding="async"
                 />
               </div>
               <div className="mt-3 text-center md:text-right">
@@ -408,7 +412,7 @@ function LandingPage() {
       </section>
 
       {/* PILARES */}
-      <section className="bg-secondary/40 py-20">
+      <section className="bg-secondary/40 py-20 cv-auto">
         <div className="mx-auto max-w-6xl px-6">
           <div className="text-center mb-12">
             <p className="text-sm font-bold uppercase tracking-widest" style={{ color: "var(--brand)" }}>
@@ -439,7 +443,7 @@ function LandingPage() {
       </section>
 
       {/* ANTES E DEPOIS — Marquee automático */}
-      <section className="py-20 bg-background overflow-hidden">
+      <section className="py-20 bg-background overflow-hidden cv-auto">
         <div className="mx-auto max-w-6xl px-6 text-center mb-10">
           <p className="text-sm font-bold uppercase tracking-widest" style={{ color: "var(--brand)" }}>
             Transformações reais
@@ -468,7 +472,11 @@ function LandingPage() {
                   <img
                     src={img}
                     alt={`Antes e depois ${i + 1}`}
-                    className="w-full h-[420px] object-cover"
+                    className="w-full h-[360px] sm:h-[420px] object-cover"
+                    width={340}
+                    height={420}
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div
                     className="absolute top-3 left-3 rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white"
@@ -490,7 +498,7 @@ function LandingPage() {
       {/* OFERTA / PLANOS */}
       <section
         id="planos"
-        className="py-20 text-white"
+        className="py-20 text-white cv-auto"
         style={{ background: "var(--gradient-dark)" }}
       >
         <div className="mx-auto max-w-6xl px-6">
@@ -593,7 +601,7 @@ function LandingPage() {
       </section>
 
       {/* PROVA SOCIAL — WhatsApp style */}
-      <section className="py-20" style={{ background: "#ECE5DD" }}>
+      <section className="py-20 cv-auto" style={{ background: "#ECE5DD" }}>
         <div className="mx-auto max-w-6xl px-6">
           <div className="text-center mb-12">
             <p className="text-sm font-bold uppercase tracking-widest" style={{ color: "var(--brand)" }}>
@@ -618,6 +626,10 @@ function LandingPage() {
                     src={t.photo}
                     alt={t.name}
                     className="h-10 w-10 rounded-full object-cover border-2 border-white/30"
+                    width={40}
+                    height={40}
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="flex-1 min-w-0">
                     <div className="font-bold text-sm truncate">{t.name}</div>
@@ -678,7 +690,7 @@ function LandingPage() {
       </section>
 
       {/* GARANTIA */}
-      <section className="py-20">
+      <section className="py-20 cv-auto">
         <div className="mx-auto max-w-3xl px-6">
           <div className="rounded-3xl border-2 border-dashed p-8 sm:p-10 text-center bg-card"
             style={{ borderColor: "var(--brand)" }}
@@ -710,7 +722,7 @@ function LandingPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-secondary/40">
+      <section className="py-20 bg-secondary/40 cv-auto">
         <div className="mx-auto max-w-3xl px-6">
           <div className="text-center mb-10">
             <p
@@ -754,7 +766,7 @@ function LandingPage() {
       </section>
 
       {/* AMANDA SHOWCASE — Banner grande */}
-      <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: "linear-gradient(135deg, #2a0a0a 0%, #4a1503 50%, #1a0505 100%)" }}>
+      <section className="relative overflow-hidden py-16 sm:py-20 cv-auto" style={{ background: "linear-gradient(135deg, #2a0a0a 0%, #4a1503 50%, #1a0505 100%)" }}>
         <div
           className="absolute inset-0 opacity-20 pointer-events-none"
           style={{ background: "radial-gradient(50% 60% at 80% 50%, var(--brand) 0%, transparent 70%)" }}
@@ -817,6 +829,10 @@ function LandingPage() {
                 src={expertImg}
                 alt="Amanda Albuquerque, nutricionista especialista em saúde hormonal"
                 className="w-full h-auto object-cover"
+                width={600}
+                height={750}
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
