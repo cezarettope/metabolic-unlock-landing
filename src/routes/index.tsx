@@ -349,49 +349,6 @@ function LandingPage() {
               </div>
             </div>
           </div>
-
-          {/* QUICK PLANS CTA after headline */}
-          <div className="mt-14">
-            <p className="text-center text-xs font-bold uppercase tracking-widest text-white/70 mb-4">
-              Escolha seu acesso e comece agora
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
-              {PLANS.map((p) => (
-                <a
-                  key={`hero-${p.name}`}
-                  href={p.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`relative rounded-2xl p-4 flex flex-col items-center text-center transition hover:scale-[1.02] ${
-                    p.highlight
-                      ? "bg-white text-foreground shadow-2xl"
-                      : "bg-white/10 border border-white/20 text-white hover:bg-white/15"
-                  }`}
-                >
-                  {p.badge && (
-                    <span
-                      className="absolute -top-2 left-1/2 -translate-x-1/2 rounded-full px-3 py-0.5 text-[10px] font-extrabold tracking-wider text-white whitespace-nowrap"
-                      style={{ background: "var(--gradient-brand)" }}
-                    >
-                      {p.badge}
-                    </span>
-                  )}
-                  <div className="text-xs font-bold uppercase tracking-wide mt-1 opacity-80">
-                    {p.name}
-                  </div>
-                  <div className="text-2xl font-extrabold mt-1">{p.price}</div>
-                  <div
-                    className={`mt-3 text-[11px] font-extrabold uppercase tracking-wider rounded-full px-3 py-1.5 ${
-                      p.highlight ? "text-white" : "bg-white/15"
-                    }`}
-                    style={p.highlight ? { background: "var(--gradient-brand)" } : undefined}
-                  >
-                    {p.cta} →
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
