@@ -412,7 +412,7 @@ function LandingPage() {
       </section>
 
       {/* PILARES */}
-      <section className="bg-secondary/40 py-20">
+      <section className="bg-secondary/40 py-20 cv-auto">
         <div className="mx-auto max-w-6xl px-6">
           <div className="text-center mb-12">
             <p className="text-sm font-bold uppercase tracking-widest" style={{ color: "var(--brand)" }}>
@@ -443,7 +443,7 @@ function LandingPage() {
       </section>
 
       {/* ANTES E DEPOIS — Marquee automático */}
-      <section className="py-20 bg-background overflow-hidden">
+      <section className="py-20 bg-background overflow-hidden cv-auto">
         <div className="mx-auto max-w-6xl px-6 text-center mb-10">
           <p className="text-sm font-bold uppercase tracking-widest" style={{ color: "var(--brand)" }}>
             Transformações reais
@@ -498,7 +498,7 @@ function LandingPage() {
       {/* OFERTA / PLANOS */}
       <section
         id="planos"
-        className="py-20 text-white"
+        className="py-20 text-white cv-auto"
         style={{ background: "var(--gradient-dark)" }}
       >
         <div className="mx-auto max-w-6xl px-6">
@@ -601,7 +601,7 @@ function LandingPage() {
       </section>
 
       {/* PROVA SOCIAL — WhatsApp style */}
-      <section className="py-20" style={{ background: "#ECE5DD" }}>
+      <section className="py-20 cv-auto" style={{ background: "#ECE5DD" }}>
         <div className="mx-auto max-w-6xl px-6">
           <div className="text-center mb-12">
             <p className="text-sm font-bold uppercase tracking-widest" style={{ color: "var(--brand)" }}>
@@ -690,7 +690,7 @@ function LandingPage() {
       </section>
 
       {/* GARANTIA */}
-      <section className="py-20">
+      <section className="py-20 cv-auto">
         <div className="mx-auto max-w-3xl px-6">
           <div className="rounded-3xl border-2 border-dashed p-8 sm:p-10 text-center bg-card"
             style={{ borderColor: "var(--brand)" }}
@@ -722,7 +722,7 @@ function LandingPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-secondary/40">
+      <section className="py-20 bg-secondary/40 cv-auto">
         <div className="mx-auto max-w-3xl px-6">
           <div className="text-center mb-10">
             <p
@@ -766,7 +766,7 @@ function LandingPage() {
       </section>
 
       {/* AMANDA SHOWCASE — Banner grande */}
-      <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: "linear-gradient(135deg, #2a0a0a 0%, #4a1503 50%, #1a0505 100%)" }}>
+      <section className="relative overflow-hidden py-16 sm:py-20 cv-auto" style={{ background: "linear-gradient(135deg, #2a0a0a 0%, #4a1503 50%, #1a0505 100%)" }}>
         <div
           className="absolute inset-0 opacity-20 pointer-events-none"
           style={{ background: "radial-gradient(50% 60% at 80% 50%, var(--brand) 0%, transparent 70%)" }}
