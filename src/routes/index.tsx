@@ -314,7 +314,7 @@ function LandingPage() {
             <p className="text-center text-xs font-bold uppercase tracking-widest text-white/70 mb-4">
               Escolha seu acesso e comece agora
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
               {PLANS.map((p) => (
                 <a
                   key={`hero-${p.name}`}
@@ -593,7 +593,24 @@ function LandingPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+          {/* TIMER URGÊNCIA */}
+          <div className="mb-10 mx-auto max-w-2xl rounded-2xl border-2 p-5 text-center" style={{ borderColor: "var(--brand)", background: "rgba(255,107,53,0.08)" }}>
+            <p className="text-sm sm:text-base font-bold text-white">
+              ⏱ Oferta expira hoje, <span style={{ color: "var(--brand)" }}>{timer.date}</span>
+            </p>
+            <div className="mt-3 flex items-center justify-center gap-2 font-mono text-3xl sm:text-4xl font-extrabold" style={{ color: "var(--brand)" }}>
+              <span className="bg-black/40 rounded px-3 py-1">{timer.h}</span>
+              <span>:</span>
+              <span className="bg-black/40 rounded px-3 py-1">{timer.m}</span>
+              <span>:</span>
+              <span className="bg-black/40 rounded px-3 py-1">{timer.s}</span>
+            </div>
+            <p className="mt-3 text-xs text-white/70 uppercase tracking-wider">
+              Preço de lançamento disponível por tempo limitado
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch max-w-3xl mx-auto">
             {PLANS.map((p) => (
               <div
                 key={p.name}
