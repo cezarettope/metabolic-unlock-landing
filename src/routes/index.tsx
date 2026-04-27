@@ -335,6 +335,10 @@ function LandingPage() {
                   src={expertImg}
                   alt="Mentora especialista do Protocolo Termo Hormonal"
                   className="h-full w-full object-cover"
+                  width={260}
+                  height={320}
+                  fetchPriority="high"
+                  decoding="async"
                 />
               </div>
               <div className="mt-3 text-center md:text-right">
