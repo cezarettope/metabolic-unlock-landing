@@ -208,6 +208,26 @@ function LandingPage() {
   const timer = useCountdown();
   return (
     <main className="min-h-screen bg-background text-foreground">
+      {/* TOP URGENCY BAR */}
+      <div
+        className="sticky top-0 z-50 w-full text-white shadow-lg"
+        style={{ background: "var(--gradient-brand)" }}
+      >
+        <div className="mx-auto max-w-6xl px-4 py-2.5 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-center">
+          <span className="text-[11px] sm:text-sm font-bold uppercase tracking-wider">
+            ⚠ Vagas limitadas · Oferta encerra em
+          </span>
+          <span className="font-mono text-base sm:text-lg font-extrabold flex items-center gap-1">
+            <span className="bg-black/30 rounded px-2 py-0.5">{timer.h}</span>:
+            <span className="bg-black/30 rounded px-2 py-0.5">{timer.m}</span>:
+            <span className="bg-black/30 rounded px-2 py-0.5">{timer.s}</span>
+          </span>
+          <span className="hidden sm:inline text-[11px] font-semibold opacity-90">
+            · Preço promocional sai do ar hoje ({timer.date})
+          </span>
+        </div>
+      </div>
+
       {/* HERO */}
       <section
         className="relative overflow-hidden text-white"
@@ -236,30 +256,39 @@ function LandingPage() {
                 <strong style={{ color: "var(--brand)" }}>3 etapas</strong> para destravar a queima de gordura mesmo com cortisol alto — sem dieta, sem remédio, sem passar fome.
               </p>
 
-              {/* MINI OFERTA */}
-              <div className="mt-7 rounded-2xl border border-white/15 bg-white/5 backdrop-blur p-5 max-w-xl">
-                <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "var(--brand)" }}>
-                  No protocolo você recebe:
+              {/* PRICE ANCHOR OFFER */}
+              <div className="mt-7 rounded-2xl border-2 p-6 max-w-xl backdrop-blur"
+                style={{ borderColor: "var(--brand)", background: "rgba(255,107,53,0.06)" }}
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white"
+                    style={{ background: "var(--gradient-brand)" }}>
+                    Oferta de lançamento
+                  </span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-white/70">
+                    81% OFF
+                  </span>
+                </div>
+                <div className="flex items-baseline gap-3 flex-wrap">
+                  <span className="text-base text-white/50 line-through decoration-2">
+                    De R$ 197,00
+                  </span>
+                  <span className="text-xs text-white/60">por apenas</span>
+                </div>
+                <div className="flex items-baseline gap-2 mt-1">
+                  <span className="text-5xl sm:text-6xl font-extrabold" style={{ color: "var(--brand)" }}>
+                    R$ 37
+                  </span>
+                  <span className="text-2xl font-extrabold text-white">,00</span>
+                  <span className="text-sm text-white/70 ml-1">à vista</span>
+                </div>
+                <p className="mt-2 text-xs text-white/70">
+                  ou <strong className="text-white">12x de R$ 3,75</strong> no cartão
                 </p>
-                <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm text-white/90">
-                  {[
-                    "Guia Inicial completo",
-                    "Direcionamento Alimentar",
-                    "Treinos de Ativação",
-                    "Mentor Nutricional 24h",
-                    "Bônus exclusivos",
-                    "30 dias de garantia",
-                  ].map((b) => (
-                    <li key={b} className="flex items-center gap-2">
-                      <CheckCircle2 className="h-4 w-4 shrink-0" style={{ color: "var(--brand)" }} />
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-4 flex items-baseline gap-2">
-                  <span className="text-xs text-white/60 line-through">De R$ 197</span>
-                  <span className="text-2xl font-extrabold text-white">Por R$ 37,00</span>
-                  <span className="text-xs text-white/60">à vista</span>
+                <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-white/60">
+                  <span className="inline-flex items-center gap-1"><Lock className="h-3 w-3" /> Pagamento seguro</span>
+                  <span className="inline-flex items-center gap-1"><ShieldCheck className="h-3 w-3" /> 30 dias garantia</span>
+                  <span className="inline-flex items-center gap-1"><Clock className="h-3 w-3" /> Acesso imediato</span>
                 </div>
               </div>
 
@@ -304,6 +333,9 @@ function LandingPage() {
                 <p className="text-xs text-white/80">Nutricionista — CRN 10-34821</p>
                 <p className="text-[11px] text-white/60 max-w-[260px]">
                   Especialista em Saúde Hormonal & Emagrecimento Metabólico
+                </p>
+                <p className="text-[11px] font-bold mt-1" style={{ color: "var(--brand)" }}>
+                  +7 anos atuando · desde 2018
                 </p>
               </div>
             </div>
