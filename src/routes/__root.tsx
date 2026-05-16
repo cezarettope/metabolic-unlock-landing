@@ -35,13 +35,19 @@ export const Route = createRootRoute({
         content:
           "Ative seu metabolismo e perca peso de forma natural com o Protocolo Termo Hormonal. +500 mil pessoas já destravaram resultados reais.",
       },
-      { property: "og:title", content: "Protocolo Termo Hormonal" },
+      { property: "og:title", content: "Protocolo Termo Hormonal — Destrave seu metabolismo" },
       {
         property: "og:description",
         content: "Desbloqueie o emagrecimento que seu corpo esconde.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Protocolo Termo Hormonal — Destrave seu metabolismo" },
+      { name: "description", content: "Landing page de vendas TSL para o \"Protocolo Termo Hormonal\" foca em emagrecimento natural." },
+      { property: "og:description", content: "Landing page de vendas TSL para o \"Protocolo Termo Hormonal\" foca em emagrecimento natural." },
+      { name: "twitter:description", content: "Landing page de vendas TSL para o \"Protocolo Termo Hormonal\" foca em emagrecimento natural." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d02f0c8b-7b0a-459c-9b27-2aea23c367f5/id-preview-bfaf9c9c--cfcd1d6b-18c6-4a51-97ad-c7646ddf75f4.lovable.app-1778967166481.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d02f0c8b-7b0a-459c-9b27-2aea23c367f5/id-preview-bfaf9c9c--cfcd1d6b-18c6-4a51-97ad-c7646ddf75f4.lovable.app-1778967166481.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
