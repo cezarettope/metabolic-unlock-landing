@@ -201,6 +201,22 @@ const STEPS: Step[] = [
       "✅ Ótimo. O método foi desenhado exatamente para corpos travados — quanto mais parado, mais rápido o resultado inicial.",
   },
   {
+    kind: "testimonial",
+    img: qad4,
+    name: "Renata S.",
+    kg: "-9 kg + redefinição",
+    quote:
+      "15 minutos por dia de Pilates na Parede. Sem academia, sem dieta louca. Minha barriga e meu bumbum mudaram completamente.",
+  },
+  {
+    kind: "testimonial",
+    img: qad5,
+    name: "Bianca T.",
+    kg: "-11 kg em 60 dias",
+    quote:
+      "A combinação termo-hormonal + parede acelerou tudo. Me sinto mais leve, mais firme e dormindo melhor.",
+  },
+  {
     kind: "question",
     id: "compromisso",
     title: "Se eu te entregar um plano 100% personalizado, você se compromete a seguir por 21 dias?",
