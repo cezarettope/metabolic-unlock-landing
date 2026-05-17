@@ -274,6 +274,7 @@ function QuizPage() {
           </section>
         )}
 
+        {step.kind === "intro" && <Intro onStart={goNext} />}
         {step.kind === "loading" && <LoadingDiagnosis onDone={goNext} />}
         {step.kind === "result" && <Result answers={answers} />}
       </main>
