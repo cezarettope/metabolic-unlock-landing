@@ -13,6 +13,7 @@ import {
   Zap,
 } from "lucide-react";
 import expertImg from "@/assets/expert.webp";
+import amandaImg from "@/assets/amanda-expert.webp";
 import ad1 from "@/assets/antes-depois-1.webp";
 import ad2 from "@/assets/antes-depois-2.webp";
 
