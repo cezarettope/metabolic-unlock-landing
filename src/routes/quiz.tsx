@@ -38,6 +38,7 @@ const CHECKOUT = `https://go.perfectpay.com.br/PPU38CQB25T${UTM}`;
 
 type Option = { label: string; emoji?: string; img?: string };
 type Step =
+  | { kind: "intro" }
   | {
       kind: "question";
       id: string;
