@@ -327,6 +327,9 @@ function QuizPage() {
         )}
 
         {step.kind === "intro" && <Intro onStart={goNext} />}
+        {step.kind === "testimonial" && (
+          <Testimonial step={step} onNext={goNext} />
+        )}
         {step.kind === "loading" && <LoadingDiagnosis onDone={goNext} />}
         {step.kind === "result" && <Result answers={answers} />}
       </main>
