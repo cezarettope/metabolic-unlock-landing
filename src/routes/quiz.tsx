@@ -54,6 +54,13 @@ type Step =
       interstitial?: string; // mensagem de desejo após responder
     }
   | { kind: "loading" }
+  | {
+      kind: "testimonial";
+      img: string;
+      name: string;
+      kg: string;
+      quote: string;
+    }
   | { kind: "result" };
 
 const STEPS: Step[] = [
