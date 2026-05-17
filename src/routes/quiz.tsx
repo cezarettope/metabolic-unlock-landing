@@ -52,6 +52,7 @@ type Step =
   | { kind: "result" };
 
 const STEPS: Step[] = [
+  { kind: "intro" },
   {
     kind: "question",
     id: "genero",
