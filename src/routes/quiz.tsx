@@ -16,6 +16,11 @@ import expertImg from "@/assets/expert.webp";
 import amandaImg from "@/assets/amanda-expert.webp";
 import ad1 from "@/assets/antes-depois-1.webp";
 import ad2 from "@/assets/antes-depois-2.webp";
+import qad1 from "@/assets/quiz-ad-1.webp";
+import qad2 from "@/assets/quiz-ad-2.webp";
+import qad3 from "@/assets/quiz-ad-3.webp";
+import qad4 from "@/assets/quiz-ad-4.webp";
+import qad5 from "@/assets/quiz-ad-5.webp";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({
