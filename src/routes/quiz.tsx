@@ -290,32 +290,42 @@ function Intro({ onStart }: { onStart: () => void }) {
         <Flame className="h-3 w-3" /> Protocolo Termo Hormonal
       </span>
 
-      <h1 className="text-balance text-3xl font-black uppercase leading-[1.05] md:text-4xl">
-        Emagreça com o{" "}
-        <span className="text-primary">Protocolo Termo Hormonal</span>
+      <h1 className="text-balance text-4xl font-black uppercase leading-[1.02] md:text-5xl">
+        <span className="block text-foreground">Emagreça com o</span>
+        <span className="block bg-gradient-to-r from-orange-500 via-primary to-orange-400 bg-clip-text text-transparent drop-shadow-[0_2px_20px_rgba(234,88,12,0.35)]">
+          Protocolo Termo Hormonal
+        </span>
       </h1>
 
-      <p className="text-balance text-sm text-muted-foreground md:text-base">
-        Ative a queima de gordura em <strong className="text-primary">3 etapas simples</strong> e
-        destrave o metabolismo bloqueado pelo cortisol —{" "}
-        <strong className="text-foreground">resultados visíveis já nas primeiras semanas</strong>,
-        sem dieta restritiva, sem remédio e sem passar fome.
+      <p className="text-balance text-base text-muted-foreground md:text-lg">
+        Ative a queima de gordura em{" "}
+        <strong className="text-primary">3 etapas simples</strong> e destrave o
+        metabolismo bloqueado pelo cortisol.
       </p>
 
-      <div className="mx-auto flex max-w-md items-center gap-4 rounded-2xl border border-border bg-card p-4 text-left">
-        <img
-          src={amandaImg}
-          alt="Amanda Albuquerque"
-          className="h-20 w-20 shrink-0 rounded-full object-cover"
-          loading="eager"
-        />
-        <div className="space-y-0.5">
-          <p className="font-bold leading-tight">Amanda Albuquerque</p>
-          <p className="text-xs text-muted-foreground">Nutricionista — CRN 10-34821</p>
-          <p className="text-xs text-muted-foreground">
-            Especialista em Saúde Hormonal & Emagrecimento Metabólico
-          </p>
-          <p className="text-[11px] text-primary">+7 anos atuando · desde 2018</p>
+      <div className="relative mx-auto max-w-md overflow-hidden rounded-2xl border border-primary/40 bg-gradient-to-br from-orange-500/15 via-card to-card p-5 text-left shadow-xl shadow-primary/10">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(234,88,12,0.25),transparent_60%)]" />
+        <div className="flex items-center gap-4">
+          <div className="relative shrink-0">
+            <div className="absolute inset-0 -m-1 rounded-full bg-gradient-to-br from-orange-400 to-primary blur-md opacity-60" />
+            <img
+              src={amandaImg}
+              alt="Amanda Albuquerque"
+              className="relative h-28 w-28 rounded-full object-cover ring-2 ring-primary/60"
+              loading="eager"
+            />
+          </div>
+          <div className="space-y-1">
+            <p className="text-lg font-extrabold leading-tight">Amanda Albuquerque</p>
+            <p className="inline-block rounded-md bg-primary/15 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-primary">
+              Nutricionista · CRN 10-34821
+            </p>
+            <p className="text-xs font-semibold text-foreground">
+              Especialista em <span className="text-primary">Saúde Hormonal</span> &{" "}
+              <span className="text-primary">Emagrecimento Metabólico</span>
+            </p>
+            <p className="text-[11px] text-muted-foreground">+7 anos atuando · desde 2018</p>
+          </div>
         </div>
       </div>
 
