@@ -282,6 +282,58 @@ function QuizPage() {
   );
 }
 
+/* ---------------- Intro ---------------- */
+function Intro({ onStart }: { onStart: () => void }) {
+  return (
+    <section className="animate-in fade-in space-y-6 text-center">
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary">
+        <Flame className="h-3 w-3" /> Protocolo Termo Hormonal
+      </span>
+
+      <h1 className="text-balance text-3xl font-black uppercase leading-[1.05] md:text-4xl">
+        Emagreça com o{" "}
+        <span className="text-primary">Protocolo Termo Hormonal</span>
+      </h1>
+
+      <p className="text-balance text-sm text-muted-foreground md:text-base">
+        Ative a queima de gordura em <strong className="text-primary">3 etapas simples</strong> e
+        destrave o metabolismo bloqueado pelo cortisol —{" "}
+        <strong className="text-foreground">resultados visíveis já nas primeiras semanas</strong>,
+        sem dieta restritiva, sem remédio e sem passar fome.
+      </p>
+
+      <div className="mx-auto flex max-w-md items-center gap-4 rounded-2xl border border-border bg-card p-4 text-left">
+        <img
+          src={amandaImg}
+          alt="Amanda Albuquerque"
+          className="h-20 w-20 shrink-0 rounded-full object-cover"
+          loading="eager"
+        />
+        <div className="space-y-0.5">
+          <p className="font-bold leading-tight">Amanda Albuquerque</p>
+          <p className="text-xs text-muted-foreground">Nutricionista — CRN 10-34821</p>
+          <p className="text-xs text-muted-foreground">
+            Especialista em Saúde Hormonal & Emagrecimento Metabólico
+          </p>
+          <p className="text-[11px] text-primary">+7 anos atuando · desde 2018</p>
+        </div>
+      </div>
+
+      <button
+        onClick={onStart}
+        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-orange-400 px-6 py-4 text-base font-extrabold uppercase tracking-wide text-primary-foreground shadow-lg transition-all hover:scale-[1.02] active:scale-100"
+      >
+        <Zap className="h-5 w-5" />
+        Fazer o teste agora
+      </button>
+
+      <p className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
+        <Lock className="h-3 w-3" /> Leva menos de 2 minutos · 100% sigiloso
+      </p>
+    </section>
+  );
+}
+
 /* ---------------- Loading ---------------- */
 function LoadingDiagnosis({ onDone }: { onDone: () => void }) {
   const items = [
