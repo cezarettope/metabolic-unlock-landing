@@ -399,6 +399,53 @@ function Intro({ onStart }: { onStart: () => void }) {
   );
 }
 
+/* ---------------- Testimonial ---------------- */
+function Testimonial({
+  step,
+  onNext,
+}: {
+  step: { img: string; name: string; kg: string; quote: string };
+  onNext: () => void;
+}) {
+  return (
+    <section className="animate-in fade-in slide-in-from-bottom-4 space-y-5 text-center">
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary">
+        <Sparkles className="h-3 w-3" /> Resultado real de aluna
+      </span>
+
+      <div className="relative overflow-hidden rounded-2xl border border-primary/30 shadow-xl shadow-primary/10">
+        <img
+          src={step.img}
+          alt={`Antes e depois — ${step.name}`}
+          className="aspect-[4/5] w-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute left-3 top-3 rounded-md bg-background/80 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-foreground backdrop-blur">
+          Antes
+        </div>
+        <div className="absolute right-3 top-3 rounded-md bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
+          Depois
+        </div>
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 via-background/70 to-transparent p-4 text-left">
+          <p className="text-sm font-bold">{step.name}</p>
+          <p className="text-xs font-semibold text-primary">{step.kg}</p>
+        </div>
+      </div>
+
+      <p className="text-balance text-sm italic text-muted-foreground md:text-base">
+        “{step.quote}”
+      </p>
+
+      <button
+        onClick={onNext}
+        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-orange-400 px-6 py-3.5 text-sm font-extrabold uppercase tracking-wide text-primary-foreground shadow-lg transition-all hover:scale-[1.02] active:scale-100"
+      >
+        Continuar meu diagnóstico
+      </button>
+    </section>
+  );
+}
+
 /* ---------------- Loading ---------------- */
 function LoadingDiagnosis({ onDone }: { onDone: () => void }) {
   const items = [
