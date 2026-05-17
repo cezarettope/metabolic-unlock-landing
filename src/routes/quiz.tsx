@@ -164,6 +164,14 @@ const STEPS: Step[] = [
       "💡 Isso confirma: seu corpo NÃO está doente. Ele está travado. O T.H.W. destrava em 3 fases curtas por dia.",
   },
   {
+    kind: "testimonial",
+    img: qad3,
+    name: "Patrícia M.",
+    kg: "-18 kg em 4 meses",
+    quote:
+      "Cortisol alto destruía minha rotina. Em 21 dias o inchaço sumiu e a balança começou a andar de verdade.",
+  },
+  {
     kind: "question",
     id: "tempo",
     title: "Quanto tempo você tem disponível por dia para se cuidar?",
