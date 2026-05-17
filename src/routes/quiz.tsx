@@ -93,6 +93,14 @@ const STEPS: Step[] = [
       "✨ Perfeito. Mulheres na sua faixa têm respondido em média 3x mais rápido ao Termo-Hormonal Wall.",
   },
   {
+    kind: "testimonial",
+    img: qad1,
+    name: "Camila R.",
+    kg: "-14 kg em 90 dias",
+    quote:
+      "Eu já tinha tentado de tudo. Em 3 semanas no Termo Hormonal eu senti meu corpo destravar — sumiu o inchaço e a compulsão.",
+  },
+  {
     kind: "question",
     id: "peso",
     title: "Quantos quilos você quer eliminar?",
