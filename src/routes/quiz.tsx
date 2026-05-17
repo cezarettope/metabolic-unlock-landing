@@ -129,6 +129,14 @@ const STEPS: Step[] = [
       "🧬 Identificamos um padrão de cortisol alto — é justamente o que o T.H.W. neutraliza nas primeiras 72h.",
   },
   {
+    kind: "testimonial",
+    img: qad2,
+    name: "Jéssica L.",
+    kg: "-22 kg em 5 meses",
+    quote:
+      "Eu nem reconheço mais meu corpo. O melhor é que voltei a comer arroz e feijão — só ajustei o que a Amanda ensinou.",
+  },
+  {
     kind: "question",
     id: "tentou",
     title: "Quantas dietas e treinos você já tentou sem sucesso?",
