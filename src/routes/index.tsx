@@ -39,14 +39,15 @@ const UTM =
 
 const PLANS = [
   {
-    name: "Mentorado Essencial",
+    name: "Protocolo Básico Hormonal",
     price: "R$ 19,90",
     badge: null,
     url: `https://go.perfectpay.com.br/PPU38CQB260${UTM}`,
     features: [
-      "Acesso ao Guia Inicial",
+      "Acesso à versão básica do App",
+      "Plano alimentar hormonal completo",
+      "Guia Inicial passo a passo",
       "Comunidade de apoio",
-      "Material de boas-vindas",
     ],
     cta: "QUERO COMEÇAR",
     highlight: false,
@@ -57,10 +58,11 @@ const PLANS = [
     badge: "MAIS ESCOLHIDO",
     url: `https://go.perfectpay.com.br/PPU38CQB25T${UTM}`,
     features: [
+      "Acesso COMPLETO ao App (alimentação, treinos, água, hub e fotos)",
       "Protocolo Termo Hormonal completo",
-      "Direcionamento Alimentar",
-      "Treinos de Ativação Metabólica",
+      "Treinos de Ativação Metabólica (Pilates na Parede)",
       "Mentor Nutricional Inteligente",
+      "Área de Antes & Depois personalizada",
       "Bônus exclusivos",
     ],
     cta: "QUERO O PROTOCOLO",
