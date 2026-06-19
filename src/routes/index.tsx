@@ -39,14 +39,15 @@ const UTM =
 
 const PLANS = [
   {
-    name: "Mentorado Essencial",
+    name: "Protocolo Básico Hormonal",
     price: "R$ 19,90",
     badge: null,
     url: `https://go.perfectpay.com.br/PPU38CQB260${UTM}`,
     features: [
-      "Acesso ao Guia Inicial",
+      "Acesso à versão básica do App",
+      "Plano alimentar hormonal completo",
+      "Guia Inicial passo a passo",
       "Comunidade de apoio",
-      "Material de boas-vindas",
     ],
     cta: "QUERO COMEÇAR",
     highlight: false,
@@ -57,10 +58,11 @@ const PLANS = [
     badge: "MAIS ESCOLHIDO",
     url: `https://go.perfectpay.com.br/PPU38CQB25T${UTM}`,
     features: [
+      "Acesso COMPLETO ao App (alimentação, treinos, água, hub e fotos)",
       "Protocolo Termo Hormonal completo",
-      "Direcionamento Alimentar",
-      "Treinos de Ativação Metabólica",
+      "Treinos de Ativação Metabólica (Pilates na Parede)",
       "Mentor Nutricional Inteligente",
+      "Área de Antes & Depois personalizada",
       "Bônus exclusivos",
     ],
     cta: "QUERO O PROTOCOLO",
@@ -256,55 +258,22 @@ function LandingPage() {
                 <strong>resultados visíveis já nas primeiras semanas</strong>, sem dieta restritiva, sem remédio e sem passar fome.
               </p>
 
-              {/* CTA PLANS — direto na headline */}
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
-                {PLANS.map((p) => (
-                  <a
-                    key={`headline-${p.name}`}
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`relative rounded-3xl p-6 flex flex-col text-left transition hover:scale-[1.02] ${
-                      p.highlight
-                        ? "bg-white text-foreground shadow-2xl"
-                        : "bg-white/5 border border-white/15 text-white"
-                    }`}
-                  >
-                    {p.badge && (
-                      <span
-                        className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-4 py-1 text-[10px] font-extrabold tracking-wider text-white whitespace-nowrap"
-                        style={{ background: "var(--gradient-brand)" }}
-                      >
-                        {p.badge}
-                      </span>
-                    )}
-                    <h3 className={`text-lg font-extrabold ${p.highlight ? "" : "text-white"}`}>{p.name}</h3>
-                    <div className={`mt-3 text-3xl font-extrabold ${p.highlight ? "" : "text-white"}`}>
-                      {p.price}
-                    </div>
-                    <div className={`text-[11px] mt-1 ${p.highlight ? "text-muted-foreground" : "text-white/60"}`}>
-                      Pagamento único · Acesso imediato
-                    </div>
-                    <ul className="mt-4 space-y-2 flex-1">
-                      {p.features.map((f) => (
-                        <li key={f} className="flex gap-2 text-xs">
-                          <CheckCircle2 className="h-4 w-4 shrink-0" style={{ color: "var(--brand)" }} />
-                          <span className={p.highlight ? "" : "text-white/85"}>{f}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <div
-                      className={`mt-5 inline-flex items-center justify-center w-full rounded-full py-3 font-extrabold uppercase tracking-wide text-xs sm:text-sm ${
-                        p.highlight
-                          ? "text-white animate-pulse-cta"
-                          : "bg-white/10 text-white border border-white/20"
-                      }`}
-                      style={p.highlight ? { background: "var(--gradient-brand)" } : undefined}
-                    >
-                      {p.cta}
-                    </div>
-                  </a>
-                ))}
+              {/* CTA único — leva para os planos */}
+              <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 justify-center md:justify-start">
+                <a
+                  href="#planos"
+                  className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-extrabold uppercase tracking-wide text-white animate-pulse-cta hover:brightness-110 transition"
+                  style={{ background: "var(--gradient-brand)" }}
+                >
+                  <Flame className="h-5 w-5" />
+                  Ver planos do App
+                </a>
+                <a
+                  href="/login"
+                  className="text-sm font-semibold text-white/80 hover:text-white underline-offset-4 hover:underline"
+                >
+                  Já sou aluna · Entrar no App →
+                </a>
               </div>
               <div className="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-2 text-xs text-white/70">
                 <span className="inline-flex items-center gap-1.5">
