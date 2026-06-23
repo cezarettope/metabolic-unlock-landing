@@ -1,826 +1,408 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
-  Flame,
-  CheckCircle2,
-  ShieldCheck,
-  BookOpen,
-  Utensils,
-  Dumbbell,
-  Brain,
-  Star,
-  Lock,
-  Clock,
-  TrendingDown,
-  CheckCheck,
-  Zap,
-  Droplet,
-  Cookie,
-  Target,
-  AlertTriangle,
-  Scale,
-} from "lucide-react";
-import expertImg from "@/assets/expert.webp";
-import dep1 from "@/assets/depoimento-1.webp";
-import dep2 from "@/assets/depoimento-2.webp";
-import dep3 from "@/assets/depoimento-3.webp";
-import ad1 from "@/assets/antes-depois-1.webp";
-import ad2 from "@/assets/antes-depois-2.webp";
-import ad3 from "@/assets/antes-depois-3.webp";
-import ad4 from "@/assets/antes-depois-4.webp";
-import ad5 from "@/assets/antes-depois-5.webp";
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+const CHECKOUT_URL = "https://pay.hotmart.com/LINKAQUI";
+const WHATSAPP_URL = "https://wa.me/5500000000000";
 
 export const Route = createFileRoute("/")({
-  component: LandingPage,
+  component: SalesPage,
+  head: () => ({
+    meta: [
+      { title: "Protocolo Termo Hormonal — Destrave seu metabolismo por R$37" },
+      {
+        name: "description",
+        content:
+          "Nutricionista revela o protocolo de 3 semanas para regular o cortisol, reativar o metabolismo e fazer o corpo voltar a emagrecer. R$37, pagamento único.",
+      },
+      { property: "og:title", content: "Protocolo Termo Hormonal — R$37" },
+      {
+        property: "og:description",
+        content:
+          "Por que dieta e academia não funcionam? Seu cortisol está bloqueando o metabolismo. Destrave em 21 dias.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://saudehormonal.lovable.app/" },
+    ],
+    links: [{ rel: "canonical", href: "https://saudehormonal.lovable.app/" }],
+  }),
 });
 
-const UTM =
-  "?utm_source=FB&utm_campaign={{campaign.name}}|{{campaign.id}}&utm_medium={{adset.name}}|{{adset.id}}&utm_content={{ad.name}}|{{ad.id}}&utm_term={{placement}}";
-
-const PLANS = [
-  {
-    name: "Protocolo Básico Hormonal",
-    price: "R$ 19,90",
-    badge: null,
-    url: `https://go.perfectpay.com.br/PPU38CQB260${UTM}`,
-    features: [
-      "Acesso à versão básica do App",
-      "Plano alimentar hormonal completo",
-      "Guia Inicial passo a passo",
-      "Comunidade de apoio",
-    ],
-    cta: "QUERO COMEÇAR",
-    highlight: false,
-  },
-  {
-    name: "Protocolo Termo Hormonal",
-    price: "R$ 37,00",
-    badge: "MAIS ESCOLHIDO",
-    url: `https://go.perfectpay.com.br/PPU38CQB25T${UTM}`,
-    features: [
-      "Acesso COMPLETO ao App (alimentação, treinos, água, hub e fotos)",
-      "Protocolo Termo Hormonal completo",
-      "Treinos de Ativação Metabólica (Pilates na Parede)",
-      "Mentor Nutricional Inteligente",
-      "Área de Antes & Depois personalizada",
-      "Bônus exclusivos",
-    ],
-    cta: "QUERO O PROTOCOLO",
-    highlight: true,
-  },
-];
-
 function useCountdown() {
-  const [t, setT] = useState({ h: "00", m: "00", s: "00", date: "--/--" });
+  const [left, setLeft] = useState({ h: 23, m: 59, s: 59 });
   useEffect(() => {
-    const update = () => {
-      const now = new Date();
-      const midnight = new Date();
-      midnight.setHours(23, 59, 59, 999);
-      const diff = midnight.getTime() - now.getTime();
-      const h = Math.floor(diff / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      const pad = (n: number) => String(n).padStart(2, "0");
-      setT({
-        h: pad(h),
-        m: pad(m),
-        s: pad(s),
-        date: now.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" }),
-      });
+    const KEY = "pth_deadline";
+    let deadline = Number(localStorage.getItem(KEY));
+    if (!deadline || Number.isNaN(deadline) || deadline < Date.now()) {
+      deadline = Date.now() + 24 * 60 * 60 * 1000;
+      localStorage.setItem(KEY, String(deadline));
+    }
+    const tick = () => {
+      const diff = Math.max(0, deadline - Date.now());
+      const h = Math.floor(diff / 3_600_000);
+      const m = Math.floor((diff % 3_600_000) / 60_000);
+      const s = Math.floor((diff % 60_000) / 1000);
+      setLeft({ h, m, s });
     };
-    update();
-    const id = setInterval(update, 1000);
+    tick();
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
-  return t;
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${pad(left.h)}h ${pad(left.m)}m ${pad(left.s)}s`;
 }
 
-const PILLARS = [
-  {
-    icon: BookOpen,
-    title: "Guia Inicial",
-    desc: "Passo a passo para destravar seu metabolismo desde o primeiro dia.",
-  },
-  {
-    icon: Utensils,
-    title: "Direcionamento Alimentar",
-    desc: "O que comer (e o que evitar) para ativar a queima hormonal de gordura.",
-  },
-  {
-    icon: Dumbbell,
-    title: "Treinos de Ativação",
-    desc: "Movimentos curtos e estratégicos que aceleram o termogênico natural.",
-  },
-  {
-    icon: Brain,
-    title: "Mentor Nutricional Inteligente",
-    desc: "Tire dúvidas 24h e receba ajustes personalizados em tempo real.",
-  },
-];
-
-const TESTIMONIALS = [
-  {
-    name: "Carla M.",
-    result: "-12kg em 90 dias",
-    photo: dep1,
-    time: "09:42",
-    messages: [
-      { from: "her", text: "Oi!! Preciso te contar 🥹" },
-      { from: "her", text: "Eu não conseguia perder NEM 1kg fazendo dieta há 2 anos." },
-      { from: "her", text: "Em 3 meses com o protocolo eliminei 12kg e desinchei completamente 😭❤️" },
-      { from: "her", text: "Tô usando roupas que estavam guardadas há anos!" },
-    ],
-  },
-  {
-    name: "Juliana R.",
-    result: "-8kg em 60 dias",
-    photo: dep2,
-    time: "14:08",
-    messages: [
-      { from: "her", text: "Achei que era impossível depois dos 40 😩" },
-      { from: "her", text: "Mas o protocolo destravou meu metabolismo de verdade." },
-      { from: "her", text: "8kg em 60 dias, sem passar fome e sem remédio 🙌" },
-      { from: "her", text: "Voltei a caber nas roupas que eu amava 💃" },
-    ],
-  },
-  {
-    name: "Patrícia L.",
-    result: "-15kg em 4 meses",
-    photo: dep3,
-    time: "20:15",
-    messages: [
-      { from: "her", text: "Gente, a retenção de líquido sumiu na PRIMEIRA semana 😱" },
-      { from: "her", text: "Minha barriga desinchou que eu não acreditei." },
-      { from: "her", text: "15kg a menos em 4 meses, é o método mais simples que já fiz!" },
-      { from: "her", text: "Recomendo de olhos fechados ❤️🔥" },
-    ],
-  },
-];
-
-const FAQS = [
-  {
-    q: "Como recebo o acesso ao protocolo?",
-    a: "Logo após a confirmação do pagamento, você recebe o acesso por e-mail e libera tudo em uma área de membros 100% online.",
-  },
-  {
-    q: "Em quanto tempo vejo resultados?",
-    a: "A maioria das alunas relata desinchaço já na primeira semana e perda de peso visível a partir do 14º dia seguindo o protocolo.",
-  },
-  {
-    q: "Funciona pra quem tem hipotireoidismo ou está na menopausa?",
-    a: "Sim. O protocolo foi desenvolvido justamente para corpos com bloqueio hormonal e metabolismo desacelerado.",
-  },
-  {
-    q: "É seguro? Preciso tomar remédio?",
-    a: "É 100% natural. Não envolve medicamentos, dietas restritivas ou jejuns extremos. Apenas estratégias de ativação metabólica.",
-  },
-  {
-    q: "Posso cancelar?",
-    a: "Sim. Você tem 30 dias de garantia incondicional. Se não gostar, devolvemos 100% do seu dinheiro.",
-  },
-];
-
-function PulseButton({
-  href,
-  children,
-  size = "lg",
-}: {
-  href: string;
-  children: React.ReactNode;
-  size?: "lg" | "md";
-}) {
+function CTA({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`inline-flex items-center justify-center gap-2 rounded-full bg-brand text-brand-foreground font-bold uppercase tracking-wide animate-pulse-cta hover:brightness-110 transition ${
-        size === "lg" ? "px-8 py-5 text-base sm:text-lg" : "px-6 py-3 text-sm"
-      }`}
-      style={{ background: "var(--gradient-brand)" }}
+      href={CHECKOUT_URL}
+      className={`inline-block w-full rounded-xl bg-[#c9a84c] px-6 py-5 text-center text-base font-bold uppercase tracking-wide text-[#1a3a2a] shadow-lg shadow-black/20 transition hover:bg-[#d8b85c] active:scale-[0.98] sm:text-lg ${className}`}
     >
-      <Flame className="h-5 w-5" />
       {children}
     </a>
   );
 }
 
-function LandingPage() {
+function SalesPage() {
   const timer = useCountdown();
+
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      {/* TOP URGENCY BAR */}
-      <div
-        className="sticky top-0 z-50 w-full text-white shadow-lg"
-        style={{ background: "var(--gradient-brand)" }}
-      >
-        <div className="mx-auto max-w-6xl px-4 py-2.5 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-center">
-          <span className="text-[11px] sm:text-sm font-bold uppercase tracking-wider">
-            ⚠ Vagas limitadas · Oferta encerra em
-          </span>
-          <span className="font-mono text-base sm:text-lg font-extrabold flex items-center gap-1">
-            <span className="bg-black/30 rounded px-2 py-0.5">{timer.h}</span>:
-            <span className="bg-black/30 rounded px-2 py-0.5">{timer.m}</span>:
-            <span className="bg-black/30 rounded px-2 py-0.5">{timer.s}</span>
-          </span>
-          <span className="hidden sm:inline text-[11px] font-semibold opacity-90">
-            · Preço promocional sai do ar hoje ({timer.date})
-          </span>
-        </div>
+    <div className="min-h-screen bg-[#f0ede6] font-sans text-[#1a3a2a]">
+      {/* Urgency bar */}
+      <div className="sticky top-0 z-50 bg-[#7a1a1a] px-3 py-2 text-center text-xs font-semibold text-[#f0ede6] sm:text-sm">
+        ⚠ Oferta por tempo limitado — Apenas R$37 · Garantia de 30 dias
       </div>
 
       {/* HERO */}
-      <section
-        className="relative overflow-hidden text-white"
-        style={{ background: "var(--gradient-dark)" }}
-      >
-        <div
-          className="absolute inset-0 opacity-30 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(60% 50% at 50% 0%, var(--brand) 0%, transparent 70%)",
-          }}
-        />
-        <div className="relative mx-auto max-w-6xl px-6 pt-14 pb-16">
-          <div className="grid md:grid-cols-[1fr_auto] gap-10 items-center">
-            <div className="text-center md:text-left">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-white/90">
-                <Flame className="h-4 w-4" style={{ color: "var(--brand)" }} />
-                Protocolo Termo Hormonal
-              </span>
-              <h1 className="mt-6 text-3xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05]">
-                EMAGREÇA COM O{" "}
-                <span style={{ color: "var(--brand)" }}>PROTOCOLO TERMO HORMONAL</span>
-              </h1>
-              <p className="mt-5 text-lg sm:text-xl font-medium text-white/85 max-w-2xl">
-                Ative a queima de gordura em <strong style={{ color: "var(--brand)" }}>3 etapas simples</strong> e destrave o metabolismo bloqueado pelo cortisol —{" "}
-                <strong>resultados visíveis já nas primeiras semanas</strong>, sem dieta restritiva, sem remédio e sem passar fome.
+      <section className="bg-gradient-to-b from-[#1a3a2a] to-[#2d5a3d] px-5 py-12 text-[#f0ede6] sm:py-20">
+        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1.3fr_1fr] md:items-center">
+          <div>
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#c9a84c] sm:text-sm">
+              Nutricionista revela o motivo real
+            </p>
+            <h1 className="font-[ui-serif,Georgia,serif] text-3xl leading-tight text-[#f0ede6] sm:text-5xl">
+              Por que você faz dieta, corta carboidrato, se mata na academia… e a balança simplesmente não desce?
+            </h1>
+            <p className="mt-6 text-base leading-relaxed text-[#cde0d2] sm:text-lg">
+              A resposta provavelmente não é falta de força de vontade. É o seu cortisol bloqueando o metabolismo — e existe um protocolo de 3 semanas para destravá-lo.
+            </p>
+            <div className="mt-8">
+              <CTA>Quero destravar meu metabolismo agora</CTA>
+              <p className="mt-3 text-center text-xs text-[#cde0d2] sm:text-sm">
+                🔒 Pagamento seguro · Acesso imediato · Garantia de 30 dias
               </p>
-
-              {/* CTA único — leva para os planos */}
-              <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 justify-center md:justify-start">
-                <a
-                  href="#planos"
-                  className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-extrabold uppercase tracking-wide text-white animate-pulse-cta hover:brightness-110 transition"
-                  style={{ background: "var(--gradient-brand)" }}
-                >
-                  <Flame className="h-5 w-5" />
-                  Ver planos do App
-                </a>
-                <a
-                  href="/login"
-                  className="text-sm font-semibold text-white/80 hover:text-white underline-offset-4 hover:underline"
-                >
-                  Já sou aluna · Entrar no App →
-                </a>
-              </div>
-              <div className="mt-6 flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-2 text-xs text-white/70">
-                <span className="inline-flex items-center gap-1.5">
-                  <ShieldCheck className="h-4 w-4" /> 30 dias de garantia
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Lock className="h-4 w-4" /> Compra 100% segura
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Star className="h-4 w-4" style={{ color: "var(--brand)" }} /> 4.9/5 em
-                  avaliações
-                </span>
-              </div>
             </div>
-
-            {/* EXPERT */}
-            <div className="flex flex-col items-center md:items-end">
-              <div
-                className="relative rounded-3xl overflow-hidden border-4"
-                style={{
-                  borderColor: "var(--brand)",
-                  boxShadow: "var(--shadow-brand)",
-                  width: "260px",
-                  height: "320px",
-                }}
-              >
-                <img
-                  src={expertImg}
-                  alt="Mentora especialista do Protocolo Termo Hormonal"
-                  className="h-full w-full object-cover"
-                  width={260}
-                  height={320}
-                  fetchPriority="high"
-                  decoding="async"
-                />
-              </div>
-              <div className="mt-3 text-center md:text-right">
-                <p className="text-base font-extrabold text-white">Amanda Albuquerque</p>
-                <p className="text-xs text-white/80">Nutricionista — CRN 10-34821</p>
-                <p className="text-[11px] text-white/60 max-w-[260px]">
-                  Especialista em Saúde Hormonal & Emagrecimento Metabólico
-                </p>
-                <p className="text-[11px] font-bold mt-1" style={{ color: "var(--brand)" }}>
-                  +7 anos atuando · desde 2018
-                </p>
-              </div>
+          </div>
+          <div className="flex justify-center">
+            <div className="flex h-48 w-48 items-center justify-center rounded-full border-4 border-[#c9a84c] bg-[#1a3a2a] font-[ui-serif,Georgia,serif] text-6xl text-[#c9a84c] shadow-2xl sm:h-64 sm:w-64 sm:text-7xl">
+              AA
             </div>
           </div>
         </div>
       </section>
 
-      {/* TSL — versão resumida e visual */}
-      <section className="mx-auto max-w-5xl px-6 py-20">
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-extrabold mb-5">
-            Faz tudo certo e a balança <span style={{ color: "var(--brand)" }}>não desce</span>?
+      {/* DOR */}
+      <section className="px-5 py-16 sm:py-20">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="text-center font-[ui-serif,Georgia,serif] text-3xl text-[#1a3a2a] sm:text-4xl">
+            Você se identifica com algum desses sinais?
           </h2>
-          <p className="text-lg text-foreground/80 leading-relaxed">
-            O problema não é força de vontade — é o{" "}
-            <strong>bloqueio hormonal do metabolismo</strong>. Cortisol alto,
-            insulina elevada e tireoide lenta colocam seu corpo em{" "}
-            <em>modo economia</em> e tudo vira gordura estocada.
-          </p>
-          <p className="mt-4 text-lg text-foreground/80 leading-relaxed">
-            O <strong>Protocolo Termo Hormonal</strong> destrava esse bloqueio em
-            poucos dias — <strong>sem dieta, sem remédio, sem passar fome.</strong>
-          </p>
-        </div>
-
-        {/* Bubbles de problemas resolvidos */}
-        <div className="mt-12">
-          <p className="text-center text-sm font-bold uppercase tracking-widest mb-8" style={{ color: "var(--brand)" }}>
-            O que o protocolo resolve
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
+          <ul className="mt-10 space-y-4">
             {[
-              { icon: Zap, label: "Metabolismo lento e cansaço" },
-              { icon: Droplet, label: "Retenção de líquido e inchaço" },
-              { icon: Cookie, label: "Compulsão por doces" },
-              { icon: Target, label: "Gordura localizada teimosa" },
-              { icon: AlertTriangle, label: "Bloqueio hormonal" },
-              { icon: Scale, label: "Balança travada" },
-            ].map(({ icon: Icon, label }) => (
-              <div
-                key={label}
-                className="group flex flex-col items-center text-center rounded-2xl bg-card border border-border p-5 hover:-translate-y-1 hover:shadow-xl transition"
+              "Faz dieta há meses e mal perde 1kg",
+              "Acorda cansada mesmo dormindo 8 horas",
+              "Barriga inchada que não some com nenhuma dieta",
+              "Ansiedade e compulsão por doce no final do dia",
+              "Já tentou low carb, jejum, shake… nada funcionou de vez",
+              'Médico diz que seus exames "estão normais" mas você não se sente bem',
+            ].map((t) => (
+              <li
+                key={t}
+                className="flex items-start gap-3 rounded-lg border border-[#1a3a2a]/10 bg-white p-4 text-[#1a3a2a]"
               >
-                <div
-                  className="flex h-16 w-16 items-center justify-center rounded-full mb-3 group-hover:scale-110 transition"
-                  style={{ background: "var(--gradient-brand)", boxShadow: "var(--shadow-brand)" }}
-                >
-                  <Icon className="h-8 w-8 text-white" />
-                </div>
-                <span className="text-sm font-semibold text-foreground/85 leading-snug">
-                  {label}
+                <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#7a1a1a] text-xs font-bold text-white">
+                  ✗
                 </span>
-              </div>
+                <span className="text-sm sm:text-base">{t}</span>
+              </li>
             ))}
-          </div>
-        </div>
-
-        <div className="mt-12 flex justify-center">
-          <PulseButton href="#planos">QUERO DESTRAVAR MEU METABOLISMO</PulseButton>
-        </div>
-      </section>
-
-      {/* PILARES */}
-      <section className="bg-secondary/40 py-20 cv-auto">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="text-center mb-12">
-            <p className="text-sm font-bold uppercase tracking-widest" style={{ color: "var(--brand)" }}>
-              O que você vai receber
-            </p>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold">
-              4 pilares para ativar sua queima de gordura
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {PILLARS.map(({ icon: Icon, title, desc }) => (
-              <div
-                key={title}
-                className="rounded-2xl bg-card border border-border p-6 hover:shadow-lg transition"
-              >
-                <div
-                  className="inline-flex h-12 w-12 items-center justify-center rounded-xl mb-4"
-                  style={{ background: "var(--gradient-brand)" }}
-                >
-                  <Icon className="h-6 w-6 text-white" />
-                </div>
-                <h3 className="text-lg font-bold mb-2">{title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ANTES E DEPOIS — Marquee automático */}
-      <section className="py-20 bg-background overflow-hidden cv-auto">
-        <div className="mx-auto max-w-6xl px-6 text-center mb-10">
-          <p className="text-sm font-bold uppercase tracking-widest" style={{ color: "var(--brand)" }}>
-            Transformações reais
+          </ul>
+          <p className="mt-8 rounded-lg bg-[#1a3a2a] p-5 text-center text-sm text-[#f0ede6] sm:text-base">
+            Se você marcou <strong className="text-[#c9a84c]">3 ou mais</strong>, seu problema provavelmente não é disciplina. É hormonal.
           </p>
-          <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold">
-            Antes e Depois de quem aplicou o Protocolo
+        </div>
+      </section>
+
+      {/* MECANISMO */}
+      <section className="bg-[#1a3a2a] px-5 py-16 text-[#f0ede6] sm:py-20">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="text-center font-[ui-serif,Georgia,serif] text-3xl sm:text-4xl">
+            O que ninguém te contou sobre o cortisol e o peso
           </h2>
-          <p className="mt-3 text-foreground/70 max-w-2xl mx-auto">
-            Resultados reais de mulheres que destravaram o metabolismo e mudaram de vida.
+          <p className="mt-3 text-center text-base text-[#c9a84c] sm:text-lg">
+            O hormônio do estresse literalmente programa seu corpo para acumular gordura
           </p>
-        </div>
-
-        <div className="relative w-full overflow-hidden">
-          {/* fade edges */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 z-10 bg-gradient-to-r from-background to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 z-10 bg-gradient-to-l from-background to-transparent" />
-
-          <div className="marquee-track flex gap-6 w-max">
-            {[...Array(2)].map((_, dup) =>
-              [ad1, ad2, ad3, ad4, ad5].map((img, i) => (
-                <div
-                  key={`${dup}-${i}`}
-                  className="relative shrink-0 w-[280px] sm:w-[340px] rounded-2xl overflow-hidden shadow-xl border-2"
-                  style={{ borderColor: "var(--brand)" }}
-                >
-                  <img
-                    src={img}
-                    alt={`Antes e depois ${i + 1}`}
-                    className="w-full h-[360px] sm:h-[420px] object-cover"
-                    width={340}
-                    height={420}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div
-                    className="absolute top-3 left-3 rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white"
-                    style={{ background: "var(--gradient-brand)" }}
-                  >
-                    Antes ➜ Depois
-                  </div>
-                </div>
-              ))
-            )}
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {[
+              {
+                icon: "🧠",
+                title: "Cortisol alto → Insulina desregulada",
+                text: "Gordura acumulada — especialmente na barriga — mesmo comendo pouco.",
+              },
+              {
+                icon: "😴",
+                title: "Sono ruim eleva o cortisol",
+                text: "Que piora o sono. Um ciclo vicioso que nenhuma dieta consegue quebrar.",
+              },
+              {
+                icon: "🔥",
+                title: "Metabolismo lento não é genética",
+                text: "É sinal de que seus hormônios precisam de um reset completo.",
+              },
+            ].map((b) => (
+              <div
+                key={b.title}
+                className="rounded-xl border border-[#c9a84c]/30 bg-[#2d5a3d] p-6"
+              >
+                <div className="text-4xl">{b.icon}</div>
+                <h3 className="mt-3 font-[ui-serif,Georgia,serif] text-lg text-[#c9a84c]">
+                  {b.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#cde0d2]">{b.text}</p>
+              </div>
+            ))}
           </div>
-        </div>
-
-        <div className="mt-10 flex justify-center px-6">
-          <PulseButton href="#planos">QUERO MINHA TRANSFORMAÇÃO</PulseButton>
         </div>
       </section>
 
-      {/* OFERTA / PLANOS */}
-      <section
-        id="planos"
-        className="py-20 text-white cv-auto"
-        style={{ background: "var(--gradient-dark)" }}
-      >
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="text-center mb-12">
-            <p
-              className="text-sm font-bold uppercase tracking-widest"
-              style={{ color: "var(--brand)" }}
-            >
-              Escolha seu plano
-            </p>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold">
-              Comece hoje. Veja resultado em poucas semanas.
+      {/* SOLUÇÃO */}
+      <section className="bg-[#2d5a3d] px-5 py-16 text-[#f0ede6] sm:py-20">
+        <div className="mx-auto max-w-3xl">
+          <div className="rounded-2xl border border-[#c9a84c]/40 bg-[#1a3a2a] p-7 sm:p-10">
+            <h2 className="text-center font-[ui-serif,Georgia,serif] text-3xl text-[#c9a84c] sm:text-4xl">
+              O Protocolo Termo Hormonal
             </h2>
-          </div>
-
-          {/* TIMER URGÊNCIA */}
-          <div className="mb-10 mx-auto max-w-2xl rounded-2xl border-2 p-5 text-center" style={{ borderColor: "var(--brand)", background: "rgba(255,107,53,0.08)" }}>
-            <p className="text-sm sm:text-base font-bold text-white">
-              ⏱ Oferta expira hoje, <span style={{ color: "var(--brand)" }}>{timer.date}</span>
+            <p className="mt-3 text-center text-base text-[#cde0d2] sm:text-lg">
+              Um método de 3 semanas criado para regular o cortisol, reativar o metabolismo e fazer o corpo voltar a emagrecer.
             </p>
-            <div className="mt-3 flex items-center justify-center gap-2 font-mono text-3xl sm:text-4xl font-extrabold" style={{ color: "var(--brand)" }}>
-              <span className="bg-black/40 rounded px-3 py-1">{timer.h}</span>
-              <span>:</span>
-              <span className="bg-black/40 rounded px-3 py-1">{timer.m}</span>
-              <span>:</span>
-              <span className="bg-black/40 rounded px-3 py-1">{timer.s}</span>
+            <ul className="mt-8 space-y-3">
+              {[
+                "Protocolo alimentar anti-cortisol (21 dias, passo a passo)",
+                "Guia de termogênese natural — alimentos que aceleram o metabolismo hormonal",
+                "Plano de sono reparador para regular os hormônios enquanto você dorme",
+                "Lista de exames hormonais para pedir ao médico",
+                "Cardápio semanal pronto (sem contar calorias)",
+                "Acesso vitalício + atualizações gratuitas",
+              ].map((t) => (
+                <li key={t} className="flex items-start gap-3">
+                  <span className="mt-0.5 text-lg text-[#c9a84c]">✓</span>
+                  <span className="text-sm text-[#f0ede6] sm:text-base">{t}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8">
+              <CTA>Quero o protocolo por R$37</CTA>
             </div>
-            <p className="mt-3 text-xs text-white/70 uppercase tracking-wider">
-              Preço de lançamento disponível por tempo limitado
-            </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch max-w-3xl mx-auto">
-            {PLANS.map((p) => (
-              <div
-                key={p.name}
-                className={`relative rounded-3xl p-7 flex flex-col ${
-                  p.highlight
-                    ? "bg-white text-foreground scale-100 md:scale-105 shadow-2xl"
-                    : "bg-white/5 border border-white/10"
-                }`}
-              >
-                {p.badge && (
-                  <span
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-4 py-1 text-xs font-extrabold tracking-wider text-white whitespace-nowrap"
-                    style={{ background: "var(--gradient-brand)" }}
-                  >
-                    {p.badge}
-                  </span>
-                )}
-                <h3 className="text-xl font-extrabold">{p.name}</h3>
-                <div className="mt-4 mb-6">
-                  <div
-                    className={`text-4xl font-extrabold ${
-                      p.highlight ? "" : "text-white"
-                    }`}
-                  >
-                    {p.price}
-                  </div>
-                  <div
-                    className={`text-xs mt-1 ${
-                      p.highlight ? "text-muted-foreground" : "text-white/60"
-                    }`}
-                  >
-                    Pagamento único · Acesso imediato
-                  </div>
-                </div>
-                <ul className="space-y-3 mb-7 flex-1">
-                  {p.features.map((f) => (
-                    <li key={f} className="flex gap-2 text-sm">
-                      <CheckCircle2
-                        className="h-5 w-5 shrink-0"
-                        style={{ color: "var(--brand)" }}
-                      />
-                      <span className={p.highlight ? "" : "text-white/85"}>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href={p.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`inline-flex items-center justify-center w-full rounded-full py-4 font-extrabold uppercase tracking-wide text-sm transition ${
-                    p.highlight
-                      ? "text-white animate-pulse-cta hover:brightness-110"
-                      : "bg-white/10 text-white hover:bg-white/20 border border-white/20"
-                  }`}
-                  style={p.highlight ? { background: "var(--gradient-brand)" } : undefined}
-                >
-                  {p.cta}
-                </a>
-              </div>
-            ))}
-          </div>
-
-          <p className="mt-10 text-center text-sm text-white/60">
-            Pagamento processado com segurança pela PerfectPay · Liberação automática
-          </p>
         </div>
       </section>
 
-      {/* PROVA SOCIAL — WhatsApp style */}
-      <section className="py-20 cv-auto" style={{ background: "#ECE5DD" }}>
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="text-center mb-12">
-            <p className="text-sm font-bold uppercase tracking-widest" style={{ color: "var(--brand)" }}>
-              Histórias reais
-            </p>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-foreground">
-              Mensagens reais de quem aplicou o protocolo
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((t) => (
-              <div
-                key={t.name}
-                className="rounded-2xl overflow-hidden shadow-2xl bg-white flex flex-col"
-              >
-                {/* WhatsApp header */}
-                <div
-                  className="flex items-center gap-3 px-4 py-3 text-white"
-                  style={{ background: "#075E54" }}
-                >
-                  <img
-                    src={t.photo}
-                    alt={t.name}
-                    className="h-10 w-10 rounded-full object-cover border-2 border-white/30"
-                    width={40}
-                    height={40}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <div className="font-bold text-sm truncate">{t.name}</div>
-                    <div className="text-[11px] text-white/80">online</div>
+      {/* DEPOIMENTOS */}
+      <section className="px-5 py-16 sm:py-20">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="text-center font-[ui-serif,Georgia,serif] text-3xl text-[#1a3a2a] sm:text-4xl">
+            Resultados reais de quem já aplicou
+          </h2>
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {[
+              { q: "Perdi 6kg em 3 semanas sem passar fome. Meu inchaço sumiu na primeira semana!", n: "Carla M.", a: "38 anos", i: "CM" },
+              { q: "Finalmente entendi por que eu não emagrecía mesmo fazendo tudo certo. Mudou minha vida.", n: "Fernanda R.", a: "44 anos", i: "FR" },
+              { q: "Resultado que 2 anos de academia não deram, esse protocolo deu em 21 dias.", n: "Juliana S.", a: "41 anos", i: "JS" },
+            ].map((d) => (
+              <div key={d.n} className="rounded-xl border border-[#1a3a2a]/10 bg-white p-5 shadow-sm">
+                <p className="text-sm leading-relaxed text-[#1a3a2a]">"{d.q}"</p>
+                <div className="mt-4 flex items-center gap-3 border-t border-[#1a3a2a]/10 pt-4">
+                  <div className="grid h-10 w-10 place-items-center rounded-full bg-[#1a3a2a] text-xs font-bold text-[#c9a84c]">
+                    {d.i}
                   </div>
-                  <div
-                    className="text-[10px] font-bold px-2 py-0.5 rounded-full"
-                    style={{ background: "var(--brand)" }}
-                  >
-                    {t.result}
-                  </div>
-                </div>
-
-                {/* Chat body */}
-                <div
-                  className="flex-1 p-4 space-y-2 min-h-[280px]"
-                  style={{
-                    background:
-                      "#ECE5DD url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='20' cy='20' r='1' fill='%23d4ccc1'/></svg>\")",
-                  }}
-                >
-                  {t.messages.map((m, i) => (
-                    <div key={i} className="flex">
-                      <div
-                        className="relative max-w-[85%] rounded-lg px-3 py-2 text-sm text-foreground shadow-sm"
-                        style={{ background: "#FFFFFF" }}
-                      >
-                        <p className="leading-snug">{m.text}</p>
-                        <div className="flex items-center justify-end gap-1 mt-1">
-                          <span className="text-[10px] text-foreground/50">
-                            {t.time}
-                          </span>
-                          <CheckCheck className="h-3 w-3 text-[#34B7F1]" />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Footer badge */}
-                <div className="bg-white px-4 py-3 border-t border-border flex items-center justify-between">
-                  <div className="flex gap-0.5" style={{ color: "var(--brand)" }}>
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-3.5 w-3.5 fill-current" />
-                    ))}
-                  </div>
-                  <div
-                    className="text-xs font-bold inline-flex items-center gap-1"
-                    style={{ color: "var(--brand)" }}
-                  >
-                    <TrendingDown className="h-3.5 w-3.5" /> {t.result}
+                  <div className="text-xs">
+                    <div className="font-bold text-[#1a3a2a]">{d.n}</div>
+                    <div className="text-[#1a3a2a]/60">{d.a}</div>
                   </div>
                 </div>
               </div>
             ))}
+          </div>
+          <div className="mt-8 text-center">
+            <div className="text-2xl text-[#c9a84c]">⭐⭐⭐⭐⭐</div>
+            <p className="mt-2 text-sm text-[#1a3a2a] sm:text-base">
+              <strong>4.9/5</strong> · +1.200 mulheres já transformaram o metabolismo
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* AMANDA */}
+      <section className="bg-[#1a3a2a] px-5 py-16 text-[#f0ede6] sm:py-20">
+        <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-[1fr_1.5fr] md:items-center">
+          <div className="flex justify-center">
+            <div className="flex h-48 w-48 items-center justify-center rounded-full border-4 border-[#c9a84c] bg-[#2d5a3d] font-[ui-serif,Georgia,serif] text-6xl text-[#c9a84c] shadow-2xl">
+              AA
+            </div>
+          </div>
+          <div>
+            <h2 className="font-[ui-serif,Georgia,serif] text-3xl text-[#c9a84c] sm:text-4xl">
+              Amanda Albuquerque
+            </h2>
+            <p className="mt-1 text-sm text-[#cde0d2]">
+              Nutricionista · CRN 10-34821 · Saúde Hormonal & Emagrecimento Metabólico
+            </p>
+            <p className="mt-5 text-base leading-relaxed text-[#f0ede6] sm:text-lg">
+              Olá, sou a Amanda Albuquerque, nutricionista especializada em saúde hormonal há mais de 7 anos. Atendo centenas de mulheres que chegam ao consultório esgotadas de dietas que não funcionam — e a maioria tem o mesmo problema: o cortisol desregulado sabotando tudo. Criei este protocolo para ser acessível e prático, para que qualquer mulher possa aplicar em casa, sem precisar de consulta individual.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* OFERTA + PREÇO */}
+      <section className="bg-[#0f2419] px-5 py-16 sm:py-20">
+        <div className="mx-auto max-w-2xl">
+          <div className="rounded-2xl border-2 border-[#c9a84c] bg-[#1a3a2a] p-7 text-center text-[#f0ede6] shadow-2xl shadow-[#c9a84c]/10 sm:p-10">
+            <p className="text-sm uppercase tracking-widest text-[#c9a84c]">Oferta especial</p>
+            <p className="mt-4 text-lg text-[#cde0d2] line-through opacity-70">R$197,00</p>
+            <p className="font-[ui-serif,Georgia,serif] text-6xl text-[#c9a84c] sm:text-7xl">
+              R$37
+            </p>
+            <p className="mt-2 text-sm text-[#cde0d2]">
+              Pagamento único. Sem mensalidade. Acesso vitalício.
+            </p>
+
+            <div className="mt-7 rounded-lg bg-[#7a1a1a] p-4">
+              <p className="text-xs uppercase tracking-wider text-[#f0ede6]/80">
+                Essa condição especial expira em:
+              </p>
+              <p className="mt-1 font-mono text-2xl font-bold text-[#f0ede6] sm:text-3xl">
+                {timer}
+              </p>
+            </div>
+
+            <div className="mt-7">
+              <CTA>Garantir minha vaga por R$37 agora</CTA>
+            </div>
+
+            <p className="mt-4 text-xs text-[#cde0d2] sm:text-sm">
+              💳 Cartão · Pix · Boleto — Parcelado em até 12x sem juros
+            </p>
+            <p className="mt-2 text-xs text-[#cde0d2]/80">
+              🔒 Compra 100% segura · Processado pela Hotmart/Kiwify
+            </p>
           </div>
         </div>
       </section>
 
       {/* GARANTIA */}
-      <section className="py-20 cv-auto">
-        <div className="mx-auto max-w-3xl px-6">
-          <div className="rounded-3xl border-2 border-dashed p-8 sm:p-10 text-center bg-card"
-            style={{ borderColor: "var(--brand)" }}
-          >
-            <div
-              className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full text-white"
-              style={{ background: "var(--gradient-brand)", boxShadow: "var(--shadow-brand)" }}
-            >
-              <ShieldCheck className="h-10 w-10" />
-            </div>
-            <p
-              className="text-sm font-extrabold uppercase tracking-widest"
-              style={{ color: "var(--brand)" }}
-            >
-              Risco Zero
-            </p>
-            <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold">
-              30 dias de garantia incondicional
-            </h2>
-            <p className="mt-4 text-foreground/80 leading-relaxed">
-              Teste o Protocolo Termo Hormonal por <strong>30 dias completos</strong>.
-              Se você não desinchar, não sentir mais energia ou simplesmente
-              mudar de ideia, basta nos enviar um e-mail e devolvemos{" "}
-              <strong>100% do seu investimento</strong>. Sem perguntas, sem
-              burocracia. O risco é todo nosso.
-            </p>
-          </div>
+      <section className="px-5 py-16 sm:py-20">
+        <div className="mx-auto max-w-2xl rounded-2xl border border-[#c9a84c]/40 bg-white p-8 text-center shadow-sm sm:p-12">
+          <div className="text-6xl text-[#c9a84c]">🛡️</div>
+          <h2 className="mt-4 font-[ui-serif,Georgia,serif] text-2xl text-[#1a3a2a] sm:text-3xl">
+            Garantia Incondicional de 30 Dias
+          </h2>
+          <p className="mt-4 text-sm leading-relaxed text-[#1a3a2a] sm:text-base">
+            Se em 30 dias você não ver nenhuma diferença no seu metabolismo, seu dinheiro volta 100%. Sem perguntas, sem burocracia. Você não tem nada a perder — e tem um metabolismo novo a ganhar.
+          </p>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-secondary/40 cv-auto">
-        <div className="mx-auto max-w-3xl px-6">
-          <div className="text-center mb-10">
-            <p
-              className="text-sm font-bold uppercase tracking-widest"
-              style={{ color: "var(--brand)" }}
-            >
-              Dúvidas frequentes
-            </p>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold">
-              Perguntas que talvez você esteja se fazendo
-            </h2>
-          </div>
-          <div className="space-y-3">
-            {FAQS.map((f) => (
-              <details
+      <section className="bg-[#f0ede6] px-5 pb-16 sm:pb-20">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="text-center font-[ui-serif,Georgia,serif] text-3xl text-[#1a3a2a] sm:text-4xl">
+            Perguntas frequentes
+          </h2>
+          <Accordion type="single" collapsible className="mt-8">
+            {[
+              {
+                q: "Para quem é esse protocolo?",
+                a: "Mulheres acima de 25 anos que sentem dificuldade de emagrecer mesmo seguindo dietas.",
+              },
+              {
+                q: "Preciso de consulta com nutricionista?",
+                a: "Não. O protocolo é 100% autoaplicável em casa.",
+              },
+              {
+                q: "Em quanto tempo vejo resultados?",
+                a: "A maioria sente diferença já na primeira semana (inchaço e energia). O emagrecimento se consolida em 21 dias.",
+              },
+              {
+                q: "Como acesso o material?",
+                a: "Imediatamente após o pagamento, você recebe um e-mail com o link de acesso.",
+              },
+              {
+                q: "E se não funcionar para mim?",
+                a: "Você tem 30 dias de garantia total. Pediu reembolso, devolvemos sem questionar.",
+              },
+            ].map((f, i) => (
+              <AccordionItem
                 key={f.q}
-                className="group rounded-xl border border-border bg-card p-5"
+                value={`item-${i}`}
+                className="mb-3 overflow-hidden rounded-lg border border-[#1a3a2a]/15 bg-white px-4"
               >
-                <summary className="flex cursor-pointer items-center justify-between font-semibold list-none">
-                  <span>{f.q}</span>
-                  <span
-                    className="ml-3 text-2xl leading-none transition group-open:rotate-45"
-                    style={{ color: "var(--brand)" }}
-                  >
-                    +
-                  </span>
-                </summary>
-                <p className="mt-3 text-foreground/75 leading-relaxed">{f.a}</p>
-              </details>
+                <AccordionTrigger className="text-left text-sm font-semibold text-[#1a3a2a] hover:no-underline sm:text-base">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-sm text-[#1a3a2a]/80">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
             ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <PulseButton href="#planos">QUERO ACESSAR O PROTOCOLO AGORA</PulseButton>
-            <p className="mt-4 text-xs text-muted-foreground inline-flex items-center gap-1.5">
-              <Clock className="h-3.5 w-3.5" />
-              Liberação imediata após pagamento
-            </p>
-          </div>
+          </Accordion>
         </div>
       </section>
 
-      {/* AMANDA SHOWCASE — Banner grande */}
-      <section className="relative overflow-hidden py-16 sm:py-20 cv-auto" style={{ background: "linear-gradient(135deg, #2a0a0a 0%, #4a1503 50%, #1a0505 100%)" }}>
-        <div
-          className="absolute inset-0 opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(50% 60% at 80% 50%, var(--brand) 0%, transparent 70%)" }}
-        />
-        <div className="relative mx-auto max-w-6xl px-6 grid md:grid-cols-2 gap-10 items-center">
-          <div className="text-white">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider">
-              <Star className="h-4 w-4 fill-current" style={{ color: "var(--brand)" }} />
-              Conheça sua especialista
-            </span>
-            <h2 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05]">
-              Amanda <span style={{ color: "var(--brand)" }}>Albuquerque</span>
-            </h2>
-            <p className="mt-3 text-lg sm:text-xl font-semibold text-white/90">
-              Nutricionista · CRN 10-34821
+      {/* CTA FINAL */}
+      <section className="bg-[#1a3a2a] px-5 py-16 text-[#f0ede6] sm:py-20">
+        <div className="mx-auto max-w-2xl text-center">
+          <div className="rounded-2xl border-2 border-[#c9a84c] bg-[#2d5a3d] p-7 sm:p-10">
+            <p className="text-lg text-[#cde0d2] line-through opacity-70">R$197,00</p>
+            <p className="font-[ui-serif,Georgia,serif] text-6xl text-[#c9a84c] sm:text-7xl">
+              R$37
             </p>
-            <p className="mt-2 text-base text-white/75">
-              Especialista em Saúde Hormonal & Emagrecimento Metabólico
-            </p>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <div className="rounded-2xl border border-white/15 bg-white/5 px-4 py-3">
-                <p className="text-3xl font-extrabold" style={{ color: "var(--brand)" }}>+7</p>
-                <p className="text-[11px] uppercase tracking-wider text-white/70">anos de atuação</p>
-              </div>
-              <div className="rounded-2xl border border-white/15 bg-white/5 px-4 py-3">
-                <p className="text-3xl font-extrabold" style={{ color: "var(--brand)" }}>2018</p>
-                <p className="text-[11px] uppercase tracking-wider text-white/70">desde</p>
-              </div>
-              <div className="rounded-2xl border border-white/15 bg-white/5 px-4 py-3">
-                <p className="text-3xl font-extrabold" style={{ color: "var(--brand)" }}>+10mil</p>
-                <p className="text-[11px] uppercase tracking-wider text-white/70">mulheres atendidas</p>
-              </div>
-            </div>
-
-            <p className="mt-6 text-base text-white/85 leading-relaxed">
-              Desde <strong>2018</strong>, Amanda dedica sua carreira a ajudar mulheres a destravar o
-              metabolismo bloqueado por desequilíbrios hormonais. Após anos de pesquisa e prática
-              clínica, ela criou o <strong style={{ color: "var(--brand)" }}>Protocolo Termo Hormonal</strong> — o método
-              que já transformou a vida de milhares de alunas.
-            </p>
-
-            <div className="mt-7">
-              <PulseButton href={`https://go.perfectpay.com.br/PPU38CQB25T${UTM}`}>
-                QUERO O MÉTODO DA AMANDA
-              </PulseButton>
+            <p className="mt-2 text-sm text-[#cde0d2]">Pagamento único · Acesso vitalício</p>
+            <div className="mt-6">
+              <CTA>Quero destravar meu metabolismo</CTA>
             </div>
           </div>
-
-          <div className="relative">
-            <div
-              className="absolute -inset-4 rounded-[2.5rem] opacity-40 blur-2xl"
-              style={{ background: "var(--gradient-brand)" }}
-            />
-            <div
-              className="relative rounded-[2rem] overflow-hidden border-4"
-              style={{ borderColor: "var(--brand)", boxShadow: "var(--shadow-brand)" }}
-            >
-              <img
-                src={expertImg}
-                alt="Amanda Albuquerque, nutricionista especialista em saúde hormonal"
-                className="w-full h-auto object-cover"
-                width={600}
-                height={750}
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </div>
+          <p className="mt-6 text-sm text-[#cde0d2] sm:text-base">
+            Você já gastou muito mais tentando dietas que não funcionaram. Por R$37 você finalmente entende o que está bloqueando seu metabolismo.
+          </p>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-dark text-white/60 py-10 text-center text-xs">
-        <div className="mx-auto max-w-3xl px-6 space-y-2">
-          <p className="text-white font-bold uppercase tracking-wider">
-            Protocolo Termo Hormonal
-          </p>
-          <p>
-            Este produto não substitui acompanhamento médico. Resultados podem
-            variar de pessoa para pessoa.
-          </p>
-          <p>© {new Date().getFullYear()} — Todos os direitos reservados.</p>
-        </div>
+      <footer className="bg-[#0f2419] px-5 py-8 text-center text-xs text-[#cde0d2]/70">
+        <p>© 2025 Protocolo Termo Hormonal · Amanda Albuquerque Nutrição</p>
+        <p className="mt-2">
+          <a href="#" className="underline hover:text-[#c9a84c]">Política de Privacidade</a>
+          <span className="mx-2">·</span>
+          <a href="#" className="underline hover:text-[#c9a84c]">Termos de Uso</a>
+        </p>
       </footer>
-    </main>
+
+      {/* WhatsApp float */}
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Falar no WhatsApp"
+        className="fixed bottom-5 right-5 z-40 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-2xl shadow-lg shadow-black/30 transition hover:scale-105"
+      >
+        💬
+      </a>
+    </div>
   );
 }
